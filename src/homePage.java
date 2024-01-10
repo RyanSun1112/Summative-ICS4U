@@ -3,6 +3,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+
 
 public class homePage {
     //INSTANCE VARIABLES
@@ -49,9 +52,18 @@ public class homePage {
     //HOME PAGE METHOD
     public void start() {
         JLayeredPane pane = new JLayeredPane();
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        URL url = classloader.getResource("ChemistryGalore_homePage.png");
-        Icon backgroundIcon = new ImageIcon(url);
+        Icon backgroundIcon=null;
+        try {
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            URL url = classloader.getResource("ChemistryGalore_homePage.png");
+            Image image = ImageIO.read(url);
+            image = image.getScaledInstance(1152,678,Image.SCALE_SMOOTH);
+            backgroundIcon = new ImageIcon(image);
+        } catch(IOException e){
+            System.out.println("error...");
+        }
+
+        //Icon backgroundIcon = new ImageIcon(url);
         JLabel background = new JLabel(backgroundIcon);
 
         background.setBounds(0,0,1152,648);
