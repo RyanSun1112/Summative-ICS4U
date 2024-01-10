@@ -11,7 +11,7 @@ class homePage {
     private JFrame frame = new JFrame("Chemistry Galore!");
     private Color white = new Color(255,255,255);
 
-    //FONT METHODS
+    //FORMATTING METHODS
     private Font theNormalFont(int size)  {
 
         GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -48,22 +48,26 @@ class homePage {
 
     }
 
-    //HOME PAGE METHOD
-    public void start() {
-        JLayeredPane pane = new JLayeredPane();
+    private JLabel backgroundImage(String theURL) {
         Icon backgroundIcon=null;
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            URL url = classloader.getResource("ChemistryGalore_homePage.png");
+            URL url = classloader.getResource(theURL);
             Image image = ImageIO.read(url);
             image = image.getScaledInstance(1152,678,Image.SCALE_SMOOTH);
             backgroundIcon = new ImageIcon(image);
         } catch(IOException e){
             System.out.println("error...");
         }
-
         JLabel background = new JLabel(backgroundIcon);
         background.setBounds(0,0,1152,648);
+        return background;
+    }
+
+    //HOME PAGE METHOD
+    public void start() {
+        JLayeredPane pane = new JLayeredPane();
+        JLabel background = backgroundImage("ChemistryGalore!/ChemistryGalore_homePage.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
