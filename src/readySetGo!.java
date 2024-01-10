@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 
 
-public class homePage {
+class homePage {
     //INSTANCE VARIABLES
     private JFrame frame = new JFrame("Chemistry Galore!");
     private Color white = new Color(255,255,255);
@@ -63,9 +62,7 @@ public class homePage {
             System.out.println("error...");
         }
 
-        //Icon backgroundIcon = new ImageIcon(url);
         JLabel background = new JLabel(backgroundIcon);
-
         background.setBounds(0,0,1152,648);
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
