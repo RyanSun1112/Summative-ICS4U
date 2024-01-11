@@ -1,5 +1,6 @@
 import javax.swing.*;
 
+
 class BalancingChemicalEquations_V1 {
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore!~ Balancing Chemical Equations!");
@@ -17,6 +18,8 @@ class BalancingChemicalEquations_V1 {
         frame.setVisible(true);
     }
 }
+
+
 
 class BalancingChemicalEquations_V2 {
     //INSTANCE VARIABLES
@@ -36,6 +39,8 @@ class BalancingChemicalEquations_V2 {
     }
 }
 
+
+
 class BalancingChemicalEquations_Answer {
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore!~ Balancing Chemical Equations!");
@@ -53,6 +58,8 @@ class BalancingChemicalEquations_Answer {
         frame.setVisible(true);
     }
 }
+
+
 
 class BalancingChemicalEquations_Explained {
     //INSTANCE VARIABLES
