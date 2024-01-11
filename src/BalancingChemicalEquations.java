@@ -3,7 +3,7 @@ import javax.swing.*;
 
 class BalancingChemicalEquations_V1 {
     //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore!~ Balancing Chemical Equations!");
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
 
 
     //BALANCING CHEMICAL EQUATIONS METHOD (1)
@@ -23,7 +23,7 @@ class BalancingChemicalEquations_V1 {
 
 class BalancingChemicalEquations_V2 {
     //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore!~ Balancing Chemical Equations!");
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
 
 
     //BALANCING CHEMICAL EQUATIONS METHOD (2)
@@ -42,8 +42,9 @@ class BalancingChemicalEquations_V2 {
 
 
 class BalancingChemicalEquations_Answer {
+
     //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore!~ Balancing Chemical Equations!");
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
 
 
     //BALANCING CHEMICAL EQUATIONS ANSWER METHOD
@@ -62,8 +63,9 @@ class BalancingChemicalEquations_Answer {
 
 
 class BalancingChemicalEquations_Explained {
+
     //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore!~ Balancing Chemical Equations!");
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
 
 
     //BALANCING CHEMICAL EXPLANATION METHOD

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 class HomePage {
+
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore!");
 
@@ -39,6 +40,7 @@ class HomePage {
 }
 
 class Choices {
+
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore!~ Choose your adventure!");
 
@@ -57,6 +59,7 @@ class Choices {
 }
 
 class HowToPlay {
+
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore! ~ How to wield this scepter!");
 

@@ -2,8 +2,9 @@ import javax.swing.*;
 
 
 class Stoichiometry {
+
     //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore!~ Stoichiometry!");
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Stoichiometry!");
 
 
     //STOICHIOMETRY METHOD
@@ -22,8 +23,9 @@ class Stoichiometry {
 
 
 class Stoichiometry_Answer {
+
     //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore!~ Stoichiometry!");
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Stoichiometry!");
 
 
     //STOICHIOMETRY METHOD
@@ -42,8 +44,9 @@ class Stoichiometry_Answer {
 
 
 class Stoichiometry_Explained {
+
     //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore!~ Stoichiometry!");
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Stoichiometry!");
 
 
     //STOICHIOMETRY METHOD
