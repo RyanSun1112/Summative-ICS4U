@@ -26,7 +26,7 @@ class HomePage {
         });
 
         Design.formatButton(instructions,20);
-        instructions.setBounds(80,525,400,80);
+        instructions.setBounds(85,525,400,80);
         pane.add(instructions);
 
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_homePage.png");
