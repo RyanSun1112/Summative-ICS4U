@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 class HomePage {
@@ -10,6 +12,21 @@ class HomePage {
     //HOME PAGE METHOD :)
     public void start() {
         JLayeredPane pane = new JLayeredPane();
+
+        JButton instructions = new JButton("Not sure how to use this app? Click HERE!");
+        instructions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                HowToPlay playTheGame = new HowToPlay();
+                playTheGame.howToPlayPage();
+            }
+        });
+
+        Design.formatButton(instructions,20);
+        instructions.setBounds(80,525,400,80);
+        pane.add(instructions);
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_homePage.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 

@@ -43,8 +43,8 @@ public class Design {
 
 
     //BUTTON FORMATTING METHOD
-    public static void formatButton(JButton button) {
-        button.setFont(theNormalFont(35));
+    public static void formatButton(JButton button, int size) {
+        button.setFont(theNormalFont(size));
         button.setFocusable(false);
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setOpaque(false);
