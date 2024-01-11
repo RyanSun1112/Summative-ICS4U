@@ -1,3 +1,6 @@
+//Class contains methods for formatting/designing various aspects of the program so that these
+//formatting methods don't need to be replicated for each individual class created
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -5,11 +8,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+
 public class Design {
+
+    //INSTANCE VARIABLES
     private static Color white = new Color(255,255,255);
 
+
+    //FONT FORMATTING METHOD
     public static Font theNormalFont(int size)  {
 
         GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -35,6 +41,8 @@ public class Design {
         return caviarDreams;
     }
 
+
+    //BUTTON FORMATTING METHOD
     public static void formatButton(JButton button) {
         button.setFont(theNormalFont(35));
         button.setFocusable(false);
@@ -46,6 +54,18 @@ public class Design {
 
     }
 
+
+    //LABEL FORMATTING METHOD
+    private void formatLabel(JLabel button) {
+        button.setFont(theNormalFont(35));
+        button.setFocusable(false);
+        button.setBorder(BorderFactory.createEmptyBorder());
+        button.setForeground(white);
+
+    }
+
+
+    //BACKGROUND MAKING METHOD
     public static JLabel setBackgroundImage(String theURL) {
         Icon backgroundIcon=null;
         try {
@@ -60,6 +80,6 @@ public class Design {
         JLabel background = new JLabel(backgroundIcon);
         background.setBounds(0,0,1152,648);
         return background;
-    }
 
+    }
 }
