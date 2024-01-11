@@ -11,6 +11,7 @@ class HomePage {
 
     //HOME PAGE METHOD :)
     public void start() {
+
         JLayeredPane pane = new JLayeredPane();
 
         JButton instructions = new JButton("Not sure how to use this app? Click HERE!");
