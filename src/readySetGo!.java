@@ -6,6 +6,9 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 
+class design {
+
+}
 class homePage {
     //INSTANCE VARIABLES
     private JFrame frame = new JFrame("Chemistry Galore!");
