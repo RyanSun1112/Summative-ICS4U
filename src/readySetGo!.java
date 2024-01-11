@@ -7,7 +7,7 @@ class homePage {
     private final JFrame frame = new JFrame("Chemistry Galore!");
 
 
-    //HOME PAGE METHOD
+    //HOME PAGE METHOD :)
     public void start() {
         JLayeredPane pane = new JLayeredPane();
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_homePage.png");
