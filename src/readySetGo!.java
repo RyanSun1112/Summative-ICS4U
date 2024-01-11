@@ -76,3 +76,11 @@ class homePage {
         frame.setVisible(true);
     }
 }
+
+class choices {
+
+}
+
+class howToPlay {
+
+}
