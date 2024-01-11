@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-class homePage {
+class HomePage {
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore!");
 
@@ -20,13 +20,13 @@ class homePage {
     }
 }
 
-class choices {
+class Choices {
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore!~ Choose your adventure!");
 
 
     //CHOICES PAGE METHOD
-    public void choicesPage() {
+    public void chooseYourAdventure() {
         JLayeredPane pane = new JLayeredPane();
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_optionsPage.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
@@ -38,7 +38,7 @@ class choices {
     }
 }
 
-class howToPlay {
+class HowToPlay {
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore! ~ How to wield this scepter!");
 

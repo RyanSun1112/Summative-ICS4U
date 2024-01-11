@@ -2,7 +2,8 @@
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        homePage home = new homePage();
+        HomePage home = new HomePage();
         home.start();
+
     }
 }
