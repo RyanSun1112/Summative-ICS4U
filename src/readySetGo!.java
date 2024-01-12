@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+
 class HomePage {
 
     //INSTANCE VARIABLES
@@ -39,6 +40,8 @@ class HomePage {
     }
 }
 
+
+
 class Choices {
 
     //INSTANCE VARIABLES
@@ -57,6 +60,8 @@ class Choices {
         frame.setVisible(true);
     }
 }
+
+
 
 class HowToPlay {
 
