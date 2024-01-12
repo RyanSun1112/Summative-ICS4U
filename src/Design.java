@@ -4,6 +4,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -50,8 +51,10 @@ public class Design {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
+        //button.setBackground(Color.black); //to check the boundaries of the button while formatting
         button.setForeground(white);
-
+        String stuff = button.getText();
+        button.setText("<HTML><p style='text-align:center;'>"+stuff+"</p></HTML>");
     }
 
 
