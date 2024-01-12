@@ -4,6 +4,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.IOException;
@@ -84,5 +86,116 @@ public class Design {
         background.setBounds(0,0,1152,648);
         return background;
 
+    }
+
+
+    //QUICK-MENU MAKING METHOD
+    public static void QuickMenu1(JLayeredPane pane, JFrame frame) {
+
+        JButton bce = new JButton("Chemical<BR>Equations!");
+        bce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                bce.page();
+            }
+        });
+        Design.formatButton(bce,18);
+        bce.setBounds(400,45,155,120);
+        pane.add(bce);
+
+        JButton moleModels = new JButton("Molecular<BR>Models!");
+        moleModels.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                //create page for molecular models
+            }
+        });
+        Design.formatButton(moleModels,18);
+        moleModels.setBounds(555,45,155,120);
+        pane.add(moleModels);
+
+        JButton moleRatios = new JButton("Molar<BR>Ratios!");
+        moleRatios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                Stoichiometry ratios = new Stoichiometry();
+                ratios.questionPage();
+            }
+        });
+        Design.formatButton(moleRatios,18);
+        moleRatios.setBounds(705,45,155,120);
+        pane.add(moleRatios);
+
+        JButton pTable = new JButton("Periodic<BR>Table!");
+        pTable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                PeriodicTable pt = new PeriodicTable();
+                pt.theElementsOfThePeriodicTable();
+            }
+        });
+        Design.formatButton(pTable,18);
+        pTable.setBounds(855,45,155,120);
+        pane.add(pTable);
+    }
+
+
+    public static void QuickMenu2(JLayeredPane pane, JFrame frame) {
+
+        JButton bce = new JButton("Balancing<BR>Chemical<BR>Equations!");
+        bce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                bce.page();
+            }
+        });
+        Design.formatButton(bce,20);
+        bce.setBounds(380,75,155,120);
+        pane.add(bce);
+
+        JButton moleModels = new JButton("Create<BR>Molecular<BR>Models!");
+        moleModels.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                //create page for molecular models
+            }
+        });
+        Design.formatButton(moleModels,20);
+        moleModels.setBounds(564,75,155,120);
+        pane.add(moleModels);
+
+        JButton moleRatios = new JButton("Play with<BR>Molar Ratios!");
+        moleRatios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                Stoichiometry ratios = new Stoichiometry();
+                ratios.questionPage();
+            }
+        });
+        Design.formatButton(moleRatios,20);
+        moleRatios.setBounds(748,75,155,120);
+        pane.add(moleRatios);
+
+        JButton pTable = new JButton("The<BR>Periodic<BR>Table!");
+        pTable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                PeriodicTable pt = new PeriodicTable();
+                pt.theElementsOfThePeriodicTable();
+            }
+        });
+        Design.formatButton(pTable,20);
+        pTable.setBounds(932,75,155,120);
+        pane.add(pTable);
     }
 }

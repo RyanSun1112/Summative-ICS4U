@@ -8,7 +8,11 @@ public class PeriodicTable {
 
     //STOICHIOMETRY METHOD
     public void theElementsOfThePeriodicTable() {
+
         JLayeredPane pane = new JLayeredPane();
+
+        Design.QuickMenu1(pane,frame);
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevsMasterpiece.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 

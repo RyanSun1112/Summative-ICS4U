@@ -9,7 +9,11 @@ class Stoichiometry {
 
     //STOICHIOMETRY METHOD
     public void questionPage() {
+
         JLayeredPane pane = new JLayeredPane();
+
+        Design.QuickMenu1(pane,frame);
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometry.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
@@ -30,7 +34,11 @@ class Stoichiometry_Answer {
 
     //STOICHIOMETRY METHOD
     public void stoichiometryAnswer() {
+
         JLayeredPane pane = new JLayeredPane();
+
+        Design.QuickMenu1(pane,frame);
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometryMasses.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
@@ -51,7 +59,11 @@ class Stoichiometry_Explained {
 
     //STOICHIOMETRY METHOD
     public void StoichiometryExplanation() {
+
         JLayeredPane pane = new JLayeredPane();
+
+        Design.QuickMenu1(pane,frame);
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometryExplained.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
