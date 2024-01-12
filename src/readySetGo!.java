@@ -129,6 +129,58 @@ class Choices {
     //CHOICES PAGE METHOD
     public void chooseYourAdventure() {
         JLayeredPane pane = new JLayeredPane();
+
+        JButton bce = new JButton("Balancing<BR>Chemical<BR>Equations!");
+        bce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                bce.page();
+            }
+        });
+        Design.formatButton(bce,27);
+        bce.setBounds(90,285,155,120);
+        pane.add(bce);
+
+        JButton moleModels = new JButton("Create<BR>Molecular<BR>Models!");
+        moleModels.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                //create page for molecular models
+            }
+        });
+        Design.formatButton(moleModels,27);
+        moleModels.setBounds(350,390,155,120);
+        pane.add(moleModels);
+
+        JButton moleRatios = new JButton("Play with<BR>Molar Ratios!");
+        moleRatios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                Stoichiometry ratios = new Stoichiometry();
+                ratios.questionPage();
+            }
+        });
+        Design.formatButton(moleRatios,27);
+        moleRatios.setBounds(615,290,155,120);
+        pane.add(moleRatios);
+
+        JButton pTable = new JButton("The<BR>Periodic<BR>Table!");
+        pTable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                PeriodicTable pt = new PeriodicTable();
+                pt.theElementsOfThePeriodicTable();
+            }
+        });
+        Design.formatButton(pTable,27);
+        pTable.setBounds(350,90,155,120);
+        pane.add(pTable);
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_optionsPage.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
@@ -150,6 +202,58 @@ class HowToPlay {
     //INSTRUCTIONS PAGE METHOD
     public void howToPlayPage() {
         JLayeredPane pane = new JLayeredPane();
+
+        JButton bce = new JButton("Balancing<BR>Chemical<BR>Equations!");
+        bce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                bce.page();
+            }
+        });
+        Design.formatButton(bce,20);
+        bce.setBounds(380,75,155,120);
+        pane.add(bce);
+
+        JButton moleModels = new JButton("Create<BR>Molecular<BR>Models!");
+        moleModels.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                //create page for molecular models
+            }
+        });
+        Design.formatButton(moleModels,20);
+        moleModels.setBounds(564,75,155,120);
+        pane.add(moleModels);
+
+        JButton moleRatios = new JButton("Play with<BR>Molar Ratios!");
+        moleRatios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                Stoichiometry ratios = new Stoichiometry();
+                ratios.questionPage();
+            }
+        });
+        Design.formatButton(moleRatios,20);
+        moleRatios.setBounds(748,75,155,120);
+        pane.add(moleRatios);
+
+        JButton pTable = new JButton("The<BR>Periodic<BR>Table!");
+        pTable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                PeriodicTable pt = new PeriodicTable();
+                pt.theElementsOfThePeriodicTable();
+            }
+        });
+        Design.formatButton(pTable,20);
+        pTable.setBounds(932,75,155,120);
+        pane.add(pTable);
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_howToPlay.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
