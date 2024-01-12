@@ -40,7 +40,7 @@ class HomePage {
             }
         });
         Design.formatButton(masterpiece,30);
-        masterpiece.setBounds(745,265,240,120);
+        masterpiece.setBounds(740,265,240,120);
         pane.add(masterpiece);
 
         JButton bce = new JButton("Balancing<BR>Chemical<BR>Equations!");
@@ -129,6 +129,19 @@ class Choices {
     //CHOICES PAGE METHOD
     public void chooseYourAdventure() {
         JLayeredPane pane = new JLayeredPane();
+
+        JButton back = new JButton("Back?");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                HomePage home = new HomePage();
+                home.start();
+            }
+        });
+        Design.formatButton(back,30);
+        back.setBounds(930,495,155,120);
+        pane.add(back);
 
         JButton bce = new JButton("Balancing<BR>Chemical<BR>Equations!");
         bce.addActionListener(new ActionListener() {
@@ -253,6 +266,19 @@ class HowToPlay {
         Design.formatButton(pTable,20);
         pTable.setBounds(932,75,155,120);
         pane.add(pTable);
+
+        JButton back = new JButton("Back?");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                HomePage home = new HomePage();
+                home.start();
+            }
+        });
+        Design.formatButton(back,30);
+        back.setBounds(280,315,155,120);
+        pane.add(back);
 
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_howToPlay.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
