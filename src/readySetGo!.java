@@ -100,7 +100,7 @@ class Choices {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
-                bce.page();
+                bce.bcePage();
             }
         });
         Design.formatButton(bce,27);
