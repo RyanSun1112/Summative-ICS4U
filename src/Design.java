@@ -198,4 +198,58 @@ public class Design {
         pTable.setBounds(932,75,155,120);
         pane.add(pTable);
     }
+
+    public static void QuickMenu3(JLayeredPane pane, JFrame frame) {
+
+        JButton bce = new JButton("Chemical<BR>Equations!");
+        bce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                bce.page();
+            }
+        });
+        Design.formatButton(bce,18);
+        bce.setBounds(400,15,155,120);
+        pane.add(bce);
+
+        JButton moleModels = new JButton("Molecular<BR>Models!");
+        moleModels.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                //create page for molecular models
+            }
+        });
+        Design.formatButton(moleModels,18);
+        moleModels.setBounds(555,15,155,120);
+        pane.add(moleModels);
+
+        JButton moleRatios = new JButton("Molar<BR>Ratios!");
+        moleRatios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                Stoichiometry ratios = new Stoichiometry();
+                ratios.questionPage();
+            }
+        });
+        Design.formatButton(moleRatios,18);
+        moleRatios.setBounds(705,15,155,120);
+        pane.add(moleRatios);
+
+        JButton pTable = new JButton("Periodic<BR>Table!");
+        pTable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                PeriodicTable pt = new PeriodicTable();
+                pt.theElementsOfThePeriodicTable();
+            }
+        });
+        Design.formatButton(pTable,18);
+        pTable.setBounds(855,15,155,120);
+        pane.add(pTable);
+    }
 }

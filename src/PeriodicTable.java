@@ -11,7 +11,7 @@ public class PeriodicTable {
 
         JLayeredPane pane = new JLayeredPane();
 
-        Design.QuickMenu1(pane,frame);
+        Design.QuickMenu3(pane,frame);
 
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevsMasterpiece.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
