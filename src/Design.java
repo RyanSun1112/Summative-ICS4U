@@ -98,7 +98,7 @@ public class Design {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
-                bce.page();
+                bce.bcePage();
             }
         });
         Design.formatButton(bce,18);
@@ -110,8 +110,8 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                MoleculeInput cool = new MoleculeInput();
-                cool.page();
+                //MoleculeInput cool = new MoleculeInput();
+                //cool.page();
             }
         });
         Design.formatButton(moleModels,18);
@@ -154,7 +154,7 @@ public class Design {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
-                bce.page();
+                bce.bcePage();
             }
         });
         Design.formatButton(bce,20);
@@ -166,8 +166,8 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                MoleculeInput cool = new MoleculeInput();
-                cool.page();
+                //MoleculeInput cool = new MoleculeInput();
+                //cool.page();
             }
         });
         Design.formatButton(moleModels,20);
@@ -209,7 +209,7 @@ public class Design {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
-                bce.page();
+                bce.bcePage();
             }
         });
         Design.formatButton(bce,18);
@@ -221,8 +221,8 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                MoleculeInput cool = new MoleculeInput();
-                cool.page();
+                //MoleculeInput cool = new MoleculeInput();
+                //cool.page();
             }
         });
         Design.formatButton(moleModels,18);

@@ -8,7 +8,7 @@ class BalancingChemicalEquations_V1 {
 
 
     //BALANCING CHEMICAL EQUATIONS METHOD (1)
-    public void page() {
+    public void bcePage() {
 
         JLayeredPane pane = new JLayeredPane();
 
@@ -33,7 +33,7 @@ class BalancingChemicalEquations_V2 {
 
 
     //BALANCING CHEMICAL EQUATIONS METHOD (2)
-    public void page() {
+    public void bcePage() {
 
         JLayeredPane pane = new JLayeredPane();
 
@@ -58,7 +58,7 @@ class BalancingChemicalEquations_Answer {
 
 
     //BALANCING CHEMICAL EQUATIONS ANSWER METHOD
-    public void page() {
+    public void bcePage() {
 
         JLayeredPane pane = new JLayeredPane();
 
@@ -83,7 +83,7 @@ class BalancingChemicalEquations_Explained {
 
 
     //BALANCING CHEMICAL EXPLANATION METHOD
-    public void page() {
+    public void bcePage() {
 
         JLayeredPane pane = new JLayeredPane();
 
