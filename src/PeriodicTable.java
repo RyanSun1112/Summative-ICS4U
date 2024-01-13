@@ -13,7 +13,21 @@ public class PeriodicTable {
 
         Design.QuickMenu3(pane,frame);
 
-        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevsMasterpiece.png");
+        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpiece.png");
+        pane.add(background,JLayeredPane.DEFAULT_LAYER);
+
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.add(pane);
+        frame.setSize(1152,678);
+        frame.setVisible(true);
+    }
+
+
+    public void theZoomedElementsOfThePeriodicTable() {
+
+        JLayeredPane pane = new JLayeredPane();
+
+        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpieceBigEdition.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
