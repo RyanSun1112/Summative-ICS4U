@@ -112,7 +112,8 @@ class Choices {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                //create page for molecular models
+                MoleculeInput cool = new MoleculeInput();
+                cool.page();
             }
         });
         Design.formatButton(moleModels,27);
