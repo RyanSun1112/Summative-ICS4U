@@ -110,8 +110,8 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                //MoleculeInput cool = new MoleculeInput();
-                //cool.page();
+                MoleculeInput cool = new MoleculeInput();
+                cool.page();
             }
         });
         Design.formatButton(moleModels,18);
@@ -166,8 +166,8 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                //MoleculeInput cool = new MoleculeInput();
-                //cool.page();
+                MoleculeInput cool = new MoleculeInput();
+                cool.page();
             }
         });
         Design.formatButton(moleModels,20);
@@ -221,8 +221,8 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                //MoleculeInput cool = new MoleculeInput();
-                //cool.page();
+                MoleculeInput cool = new MoleculeInput();
+                cool.page();
             }
         });
         Design.formatButton(moleModels,18);
