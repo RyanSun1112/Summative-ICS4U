@@ -1,6 +1,6 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
 
 class Stoichiometry {
@@ -27,7 +27,7 @@ class Stoichiometry {
         });
         Design.formatButton(back,30);
         back.setBounds(165,420,155,120);
-        pane.add(back);
+        pane.add(back,JLayeredPane.PALETTE_LAYER);
 
         JButton next = new JButton("Next!");
         next.addActionListener(new ActionListener() {
@@ -40,16 +40,35 @@ class Stoichiometry {
         });
         Design.formatButton(next,30);
         next.setBounds(340,420,155,120);
-        pane.add(next);
+        pane.add(next,JLayeredPane.PALETTE_LAYER);
 
+        String[] petStrings = { " ", "<HTML> CO<sub>2</sub></HTML>", "<HTML> H<sub>2</sub>O</HTML>", "<HTML> O<sub>2</sub></HTML>"};
+
+        JComboBox chemicals = new JComboBox(petStrings);
+        chemicals.setBounds(625,325,470,50);
+        pane.add(chemicals, JLayeredPane.PALETTE_LAYER);
+        JTextField inputArea = new JTextField(1);
+        chemicals.setOpaque(false);
+        chemicals.setBackground(Color.white);
+        inputArea.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                chemicals.setPopupVisible(true);
+            }
+        });
+        inputArea.setBounds(100,0,100,100);
+        pane.add(inputArea,JLayeredPane.PALETTE_LAYER);
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometry.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
-
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(pane);
         frame.setSize(1152,678);
         frame.setVisible(true);
     }
+    public void actionPerformed(ActionEvent e) {
+        System.out.print(e);
+    }
+
 }
 
 

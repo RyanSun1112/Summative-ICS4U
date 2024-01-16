@@ -68,12 +68,12 @@ class MoleculeOutput{
         String url = "https://www.google.com/search?q=3d+molecule+model+of+"+molecule+"+molinstincts&tbm=isch&ved=2ahUKEwjOs8_GkdmDAxVPGVkFHUWWDKMQ2-cCegQIABAA&oq=3d+molecule+model+of+methane+molinstincts&gs_lcp=CgNpbWcQAzoECCMQJ1CLA1iLA2DOCGgAcAB4AIABSogBkgGSAQEymAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=KN2hZc5_z7Lk2g_FrLKYCg&bih=945&biw=1199&rlz=1C1RXQR_enCA986CA986&hl=en";
         String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
         molecule2.toLowerCase();
-        String s1 = molecule2.substring(0, 1).toUpperCase();
-        String nameCapitalized = s1 + molecule2.substring(1);
-        molecule.toLowerCase();
-        String s2 = molecule.substring(0, 1).toUpperCase();
-        String nameCapitalized2 = s2 + molecule.substring(1);
         try{
+            String s1 = molecule2.substring(0, 1).toUpperCase();
+            String nameCapitalized = s1 + molecule2.substring(1);
+            molecule.toLowerCase();
+            String s2 = molecule.substring(0, 1).toUpperCase();
+            String nameCapitalized2 = s2 + molecule.substring(1);
             Document doc = Jsoup.connect(url).get();
             Elements img = doc.getElementsByTag("a");
             for (Element el : img) {
@@ -116,7 +116,26 @@ class MoleculeOutput{
             found = false;
             // Loop through img tags
         }catch(IOException e){
-            System.out.print("KYS");
+            JLabel notFound = new JLabel("Not Found");
+            notFound.setFont(Design.theNormalFont(40));
+            notFound.setBounds(450,300,320,320);
+            pane.add(notFound,JLayeredPane.PALETTE_LAYER);
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            frame.add(pane);
+            frame.setSize(1152,678);
+            frame.setVisible(true);
+            found = false;
+        }catch(StringIndexOutOfBoundsException e){
+
+            JLabel notFound = new JLabel("Not Found");
+            notFound.setFont(Design.theNormalFont(40));
+            notFound.setBounds(450,300,320,320);
+            pane.add(notFound,JLayeredPane.PALETTE_LAYER);
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            frame.add(pane);
+            frame.setSize(1152,678);
+            frame.setVisible(true);
+            found = false;
         }
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_moleculeActualModel.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
@@ -157,4 +176,5 @@ class MoleculeOutput{
         }
         return null;
     }
+
 }
