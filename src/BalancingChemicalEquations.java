@@ -57,6 +57,8 @@ class BalancingChemicalEquations_V1 {
         noFormula.setBounds(60,345,455,320);
         pane.add(noFormula);
 
+        JTextField unbalanced = new JTextField();
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_BCE1.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
