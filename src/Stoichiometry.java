@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -45,11 +46,11 @@ class Stoichiometry {
         String[] petStrings = { " ", "<HTML> CO<sub>2</sub></HTML>", "<HTML> H<sub>2</sub>O</HTML>", "<HTML> O<sub>2</sub></HTML>"};
 
         JComboBox chemicals = new JComboBox(petStrings);
-        chemicals.setBounds(625,325,470,50);
+        Design.formatComboBox(chemicals);
+        chemicals.setBounds(640,325,430,50);
         pane.add(chemicals, JLayeredPane.PALETTE_LAYER);
         JTextField inputArea = new JTextField(1);
-        chemicals.setOpaque(false);
-        chemicals.setBackground(Color.white);
+
         inputArea.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {

@@ -3,6 +3,7 @@
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -99,6 +100,25 @@ public class Design {
                 }
             }
         });
+    }
+
+
+    //COMBO BOX FORMATTING METHOD
+    public static void formatComboBox(JComboBox comboBoxName) {
+        comboBoxName.setFocusable(false);
+        comboBoxName.setBorder(BorderFactory.createEmptyBorder());
+        comboBoxName.setOpaque(false);
+        for(int i = 0; i < comboBoxName.getComponentCount(); i++) {
+            if (comboBoxName.getComponent(i) instanceof JComponent) {
+                ((JComponent) comboBoxName.getComponent(i)).setBorder(new EmptyBorder(0,0,0,0));
+            }
+            if (comboBoxName.getComponent(i) instanceof AbstractButton) {
+                ((AbstractButton) comboBoxName.getComponent(i)).setBorderPainted(false);
+            }
+        }
+        comboBoxName.setFont(Design.theNormalFont(20));
+        comboBoxName.setBackground(white);
+        comboBoxName.setForeground(darkBlue);
     }
 
 
