@@ -1,12 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ChemistryEquations {
-    public void getElements() {
 
-    }
-
-    public String balancedChemicalEquation(String unbalanced) {
-        ArrayList<String> array = new ArrayList<String>();
-        return "";
-    }
 }
