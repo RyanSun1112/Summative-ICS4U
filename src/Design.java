@@ -53,7 +53,8 @@ public class Design {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
-        //button.setBackground(Color.black); //to check the boundaries of the button while formatting
+        //button.setBackground(Color.black);    //to check the boundaries of the button while formatting
+                                                //should be deleted when the program is finished!!
         button.setForeground(white);
         String stuff = button.getText();
         button.setText("<HTML><p style='text-align:center;'>"+stuff+"</p></HTML>");
@@ -61,11 +62,11 @@ public class Design {
 
 
     //LABEL FORMATTING METHOD
-    private void formatLabel(JLabel button) {
-        button.setFont(theNormalFont(35));
-        button.setFocusable(false);
-        button.setBorder(BorderFactory.createEmptyBorder());
-        button.setForeground(white);
+    public static void formatLabel(JLabel label) {
+        label.setFont(theNormalFont(35));
+        label.setFocusable(false);
+        label.setBorder(BorderFactory.createEmptyBorder());
+        label.setForeground(white);
 
     }
 
