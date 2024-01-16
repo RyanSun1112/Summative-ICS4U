@@ -1,6 +1,9 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 
 class BalancingChemicalEquations_V1 {
@@ -56,6 +59,11 @@ class BalancingChemicalEquations_V1 {
         Design.formatButton(noFormula,20);
         noFormula.setBounds(60,345,455,320);
         pane.add(noFormula);
+
+        JTextField unbalanced = new JTextField();
+        Design.formatTextField(unbalanced,"Please insert your chemical equation here.");
+        unbalanced.setBounds(500,450,100,50);
+        pane.add(unbalanced);
 
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_BCE1.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);

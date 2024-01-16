@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +17,9 @@ import java.net.URL;
 public class Design {
 
     //INSTANCE VARIABLES
-    private static Color white = new Color(255,255,255);
+    private final static Color white = new Color(255,255,255);
+    private final static Color darkBlue = new Color(31, 81, 81);
+
 
 
     //FONT FORMATTING METHOD
@@ -53,7 +57,8 @@ public class Design {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
-        //button.setBackground(Color.black); //to check the boundaries of the button while formatting
+        //button.setBackground(Color.black);    //to check the boundaries of the button while formatting
+                                                //should be deleted when the program is finished!!
         button.setForeground(white);
         String stuff = button.getText();
         button.setText("<HTML><p style='text-align:center;'>"+stuff+"</p></HTML>");
@@ -61,12 +66,39 @@ public class Design {
 
 
     //LABEL FORMATTING METHOD
-    private void formatLabel(JLabel button) {
-        button.setFont(theNormalFont(35));
-        button.setFocusable(false);
-        button.setBorder(BorderFactory.createEmptyBorder());
-        button.setForeground(white);
+    public static void formatLabel(JLabel label) {
+        label.setFont(theNormalFont(35));
+        label.setFocusable(false);
+        label.setBorder(BorderFactory.createEmptyBorder());
+        label.setForeground(white);
 
+    }
+
+
+    //TEXT FIELD FORMATTING METHOD
+    public static void formatTextField(JTextField textFieldName, String defaultText) {
+        textFieldName.setFont(Design.theNormalFont(50));
+        textFieldName.setForeground(darkBlue);
+        textFieldName.setColumns(7);
+        textFieldName.setBorder(BorderFactory.createEmptyBorder());
+        textFieldName.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                String words = textFieldName.getText();
+                if(words.equals("Please insert your chemical equation here.")) {
+                    textFieldName.setText("");
+                    textFieldName.setForeground(darkBlue);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                String words = textFieldName.getText();
+                if (words.isEmpty() || words.isBlank()){
+                    textFieldName.setText("Please insert your chemical equation here.");
+                    textFieldName.setForeground(new Color(103, 103, 103));
+                }
+            }
+        });
     }
 
 
