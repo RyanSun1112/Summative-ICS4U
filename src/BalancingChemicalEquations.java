@@ -60,10 +60,11 @@ class BalancingChemicalEquations_V1 {
         noFormula.setBounds(60,345,455,320);
         pane.add(noFormula);
 
-        JTextField unbalanced = new JTextField();
-        Design.formatTextField(unbalanced,"Please insert your chemical equation here.");
-        unbalanced.setBounds(500,450,100,50);
-        pane.add(unbalanced);
+        String[] reactions = {"Single Displacement", "Double Displacement", "Decomposition", "Synthesis", "Combustion (complete)", "Combustion (incomplete)"};
+        JComboBox typeOfReaction = new JComboBox(reactions);
+        Design.formatComboBox(typeOfReaction);
+        typeOfReaction.setBounds(800,390,200,55);
+        pane.add(typeOfReaction);
 
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_BCE1.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);

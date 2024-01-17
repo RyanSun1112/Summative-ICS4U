@@ -43,7 +43,7 @@ class Stoichiometry {
         next.setBounds(340,420,155,120);
         pane.add(next,JLayeredPane.PALETTE_LAYER);
 
-        String[] petStrings = { " ", "<HTML> CO<sub>2</sub></HTML>", "<HTML> H<sub>2</sub>O</HTML>", "<HTML> O<sub>2</sub></HTML>"};
+        String[] petStrings = { " ", "<HTML> CO<sub>2</sub></HTML>", "<HTML> H<sub>2</sub>O</HTML>", "<HTML> O<sub>2</sub></HTML>","<HTML> H<sub>2</sub>CO<sub>3</sub></HTML>"};
 
         JComboBox chemicals = new JComboBox(petStrings);
         Design.formatComboBox(chemicals);
