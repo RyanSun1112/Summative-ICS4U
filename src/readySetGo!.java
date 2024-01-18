@@ -180,10 +180,49 @@ class HowToPlay {
             }
         });
         Design.formatButton(back,30);
-        back.setBounds(280,315,155,120);
+        back.setBounds(280,295,155,120);
         pane.add(back);
 
-        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_howToPlay.png");
+        String theInstructions = "WELCOME, ONE AND ALL!" +
+                "<BR>" +
+                "<BR>Have you ever had to deal with thousand upon thousands of chemical balancing questions? What about" +
+                "<BR>molar masses? Forget the elements of the Periodic Table? Well then, welcome to the world of Chemistry" +
+                "<BR>Galore! There are three main features of this app. The first is balancing chemical equations..." +
+                "<BR>" +
+                "<BR>" +
+                "<BR>BALANCING CHEMICAL EQUATIONS!!" +
+                "<BR>" +
+                "<BR>In this page, you'll find you can take one of two paths. Firstly, you can insert the unbalanced chemical" +
+                "<BR>equation, as well as enter the type of reaction. When you click 'Next! >' the program will give you the" +
+                "<BR>balanced chemical equation. If you don't know what the full balanced chemical equation is, then not to" +
+                "<BR>worry! In the bottom left corner, there's an option to switch over to the second version of the page. The" +
+                "<BR>second version is far simpler: you enter the reactants (and type of reaction), then we do the rest Not" +
+                "<BR>too shabby, right?" +
+                "<BR>" +
+                "<BR>" +
+                "<BR>MOLAR MASSES!!" +
+                "<BR>" +
+                "<BR>Have you ever casually wondered what the mass of products (stuff produced after a reaction) is, but you're" +
+                "<BR>only given the mass of one of the reactants (things that react)? Well, it happens to the best of us. On" +
+                "<BR>the Stoichiometry page (also called the Molar Masses page), after entering the chemical formula and the" +
+                "<BR>mass of ONE of the reactants (and after specifying which reactant), we'll give you the masses of all the" +
+                "<BR>products produced! Wouldn't you say that's neat?" +
+                "<BR>" +
+                "<BR>";
+
+        JLabel instructions = new JLabel(theInstructions);
+        Design.formatLabel(instructions,17);
+        instructions.setBounds(150,300,900,3050);
+        pane.add(instructions);
+
+        JScrollPane scroll = new JScrollPane(pane);
+        scroll.getVerticalScrollBar().setUnitIncrement(5);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll.setBorder(BorderFactory.createEmptyBorder());
+        scroll.setOpaque(false);
+
+        JLabel background = Design.setScrollBackgroundImage("ChemistryGalore!/ChemistryGalore_howToPlay.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

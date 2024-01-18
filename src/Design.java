@@ -57,8 +57,6 @@ public class Design {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
-        //button.setBackground(Color.black);    //to check the boundaries of the button while formatting
-                                                //should be deleted when the program is finished!!
         button.setForeground(white);
         String stuff = button.getText();
         button.setText("<HTML><p style='text-align:center;'>"+stuff+"</p></HTML>");
@@ -66,12 +64,13 @@ public class Design {
 
 
     //LABEL FORMATTING METHOD
-    public static void formatLabel(JLabel label) {
-        label.setFont(theNormalFont(35));
+    public static void formatLabel(JLabel label, int size) {
+        label.setFont(theNormalFont(size));
         label.setFocusable(false);
         label.setBorder(BorderFactory.createEmptyBorder());
         label.setForeground(white);
-
+        String stuff = label.getText();
+        label.setText("<HTML><p style='text-align:center;'>"+stuff+"</p></HTML>");
     }
 
 
@@ -103,7 +102,7 @@ public class Design {
 
 
     //COMBO BOX FORMATTING METHOD
-    public static void formatComboBox(JComboBox comboBoxName) {
+    public static void formatComboBox(JComboBox comboBoxName, int size) {
         comboBoxName.setFocusable(false);
         comboBoxName.setBorder(BorderFactory.createEmptyBorder());
         comboBoxName.setOpaque(false);
@@ -115,13 +114,13 @@ public class Design {
                 ((AbstractButton) comboBoxName.getComponent(i)).setBorderPainted(false);
             }
         }
-        comboBoxName.setFont(Design.theNormalFont(20));
+        comboBoxName.setFont(Design.theNormalFont(size));
         comboBoxName.setBackground(white);
         comboBoxName.setForeground(darkBlue);
     }
 
 
-    //BACKGROUND MAKING METHOD
+    //BACKGROUND MAKING METHODS
     public static JLabel setBackgroundImage(String theURL) {
         Icon backgroundIcon=null;
         try {
@@ -138,6 +137,22 @@ public class Design {
         return background;
 
     }
+
+    public static JLabel setScrollBackgroundImage(String theURL) { //DOESNT WORK YET!!!!!!!!!!!/////////////
+        Icon backgroundIcon=null;
+        try {
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            URL url = classloader.getResource(theURL);
+            Image image = ImageIO.read(url);
+            backgroundIcon = new ImageIcon(image);
+        } catch(IOException e){
+            System.out.println("error...");
+        }
+        JLabel background = new JLabel(backgroundIcon);
+        background.setBounds(0,0,1152,648);
+        return background;
+
+    }////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     //QUICK-MENU MAKING METHOD

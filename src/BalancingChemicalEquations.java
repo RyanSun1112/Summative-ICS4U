@@ -62,8 +62,8 @@ class BalancingChemicalEquations_V1 {
 
         String[] reactions = {"Single Displacement", "Double Displacement", "Decomposition", "Synthesis", "Combustion (complete)", "Combustion (incomplete)"};
         JComboBox typeOfReaction = new JComboBox(reactions);
-        Design.formatComboBox(typeOfReaction);
-        typeOfReaction.setBounds(800,390,200,55);
+        Design.formatComboBox(typeOfReaction,15);
+        typeOfReaction.setBounds(800,390,195,55);
         pane.add(typeOfReaction);
 
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_BCE1.png");

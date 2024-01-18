@@ -46,7 +46,7 @@ class Stoichiometry {
         String[] petStrings = { " ", "<HTML> CO<sub>2</sub></HTML>", "<HTML> H<sub>2</sub>O</HTML>", "<HTML> O<sub>2</sub></HTML>","<HTML> H<sub>2</sub>CO<sub>3</sub></HTML>"};
 
         JComboBox chemicals = new JComboBox(petStrings);
-        Design.formatComboBox(chemicals);
+        Design.formatComboBox(chemicals,20);
         chemicals.setBounds(640,325,430,50);
         pane.add(chemicals, JLayeredPane.PALETTE_LAYER);
         JTextField inputArea = new JTextField(1);
