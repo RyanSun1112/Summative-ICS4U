@@ -60,14 +60,14 @@ class MoleculeOutput{
         Design.QuickMenu1(pane,frame);
 
 
-
+// fix algorithm for 3D model
         String molecule = line;
         String molecule2 = molecule;
         boolean found = false;
 
         String url = "https://www.google.com/search?q=3d+molecule+model+of+"+molecule+"+molinstincts&tbm=isch&ved=2ahUKEwjOs8_GkdmDAxVPGVkFHUWWDKMQ2-cCegQIABAA&oq=3d+molecule+model+of+methane+molinstincts&gs_lcp=CgNpbWcQAzoECCMQJ1CLA1iLA2DOCGgAcAB4AIABSogBkgGSAQEymAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=KN2hZc5_z7Lk2g_FrLKYCg&bih=945&biw=1199&rlz=1C1RXQR_enCA986CA986&hl=en";
         String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
-        molecule2.toLowerCase();
+        molecule = molecule.toLowerCase();
         try{
             String s1 = molecule2.substring(0, 1).toUpperCase();
             String nameCapitalized = s1 + molecule2.substring(1);
