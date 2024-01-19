@@ -152,7 +152,7 @@ class Stoichiometry {
                     if(output.length()==1) {
                         inputArea.setText(output + "+ ");
                     }else{
-                        String actual = "<html>";
+                        String actual = "<HTML>";
                         for(int i = 0; i < output.length(); i++){
                             if(Character.isDigit(output.charAt(i))){
                                 actual += "<sub>" + output.charAt(i) + "</sub>";
@@ -161,7 +161,7 @@ class Stoichiometry {
                             }
                         }
 
-                        actual +=" + </html>";
+                        actual +=" + </HTML>";
                         System.out.print(actual);
                         inputArea.setText(actual);
                     }
