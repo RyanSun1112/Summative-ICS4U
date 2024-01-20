@@ -138,21 +138,19 @@ public class Design {
 
     }
 
-    public static JLabel setScrollBackgroundImage(String theURL) { //DOESNT WORK YET!!!!!!!!!!!/////////////
-        Icon backgroundIcon=null;
+    public static Image setScrollBackgroundImage(String theURL) {
+        Image image=null;
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             URL url = classloader.getResource(theURL);
-            Image image = ImageIO.read(url);
-            backgroundIcon = new ImageIcon(image);
+            image = ImageIO.read(url);
+            image = image.getScaledInstance(864,2560,Image.SCALE_SMOOTH);
         } catch(IOException e){
             System.out.println("error...");
         }
-        JLabel background = new JLabel(backgroundIcon);
-        background.setBounds(0,0,1152,648);
-        return background;
+        return image;
 
-    }////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
 
 
     //QUICK-MENU MAKING METHOD
