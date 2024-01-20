@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 class Stoichiometry {
@@ -15,8 +16,11 @@ class Stoichiometry {
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore! ~ Stoichiometry!");
     private final JComboBox chemicals = new JComboBox();
-    private final JTextField inputArea = new JTextField();
-    String minus = "";
+    private final JTextPane inputArea = new JTextPane();
+    boolean minus = false;
+    String temp = "";
+    String transfer = "";
+    ArrayList<String> reactants = new ArrayList<String>();
 
     //STOICHIOMETRY METHOD
     public void questionPage() {
@@ -67,7 +71,7 @@ class Stoichiometry {
         chemicals.setFont(Design.theNormalFont(12));
         inputArea.setOpaque(false);
         inputArea.setBorder(new EmptyBorder(0, 0,0,0));
-        inputArea.setBounds(635,300,420,100);
+        inputArea.setBounds(635,330,420,100);
         inputArea.setFont(Design.theNormalFont(20));
         pane.add(inputArea,JLayeredPane.POPUP_LAYER);
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometry.png");
@@ -81,21 +85,47 @@ class Stoichiometry {
         inputArea.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                System.out.print(inputArea.getText());
+                temp = "";
+                int counter1 = 0;
+                if (minus == false){
+                    temp = inputArea.getText();
+                }else{
+
+                    System.out.print(inputArea.getText());
+                    boolean find = false;
+                    for(int i = 0; i < inputArea.getText().length(); i++){
+
+                        if(find == true){
+                            if(inputArea.getText().charAt(i) == '\n'){
+                                break;
+                            }
+                            temp += inputArea.getText().charAt(i);
+                        }
+                        if(inputArea.getText().charAt(i) == '+'){
+                            counter1++;
+                            if (counter1 == reactants.size()) {
+                                find = true;
+                            }
+                        }
+
+                    }
+                    System.out.print(temp);
+
+                }
                 chemicals.removeAllItems();
-                if(inputArea.getText().isEmpty()){
+                if(temp.isEmpty()){
                     chemicals.setPopupVisible(false);
                 }else{
 
                     chemicals.setPopupVisible(true);
                     String url = null;
                     boolean yes = false;
-                    String ll = inputArea.getText();
-                    if(inputArea.getText().length() == 1|| (Character.isDigit(ll.charAt(1)) && ll.length()==2)){
-                        url =  "https://webbook.nist.gov/cgi/cbook.cgi?Formula="+inputArea.getText()+"&AllowExtra=on&NoIon=on&Units=SI";
+                    String ll = temp;
+                    if(temp.length() == 1|| (Character.isDigit(ll.charAt(1)) && ll.length()==2)||(Character.isUpperCase(ll.charAt(0)) && Character.isLowerCase(ll.charAt(1)))){
+                        url =  "https://webbook.nist.gov/cgi/cbook.cgi?Formula="+ll+"&AllowExtra=on&NoIon=on&Units=SI";
                     }else{
 
-                        url =  "https://webbook.nist.gov/cgi/cbook.cgi?Formula="+inputArea.getText()+"&NoIon=on&Units=SI";
+                        url =  "https://webbook.nist.gov/cgi/cbook.cgi?Formula="+ll+"&NoIon=on&Units=SI";
 
                     }
                     String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
@@ -149,10 +179,9 @@ class Stoichiometry {
                     String[] arrOfStr2 = arrOfStr[1].split("\\)");
 
                     String output = arrOfStr2[0];
-                    if(output.length()==1) {
-                        inputArea.setText(output + "+ ");
-                    }else{
-                        String actual = "<html>";
+                    reactants.add(output);
+                    if(minus == false){
+                        String actual = "<HTML>";
                         for(int i = 0; i < output.length(); i++){
                             if(Character.isDigit(output.charAt(i))){
                                 actual += "<sub>" + output.charAt(i) + "</sub>";
@@ -161,8 +190,34 @@ class Stoichiometry {
                             }
                         }
 
-                        actual +=" + </html>";
-                        System.out.print(actual);
+                        actual +=" + </HTML>";
+                        String all = actual;
+
+                        inputArea.setContentType("text/html");
+                        inputArea.setText(all);
+                        minus = true;
+                    }else{
+                        String newTemp = "";
+                        for(int i = 0; i < output.length(); i++){
+                            if(Character.isDigit(output.charAt(i))){
+                                newTemp += "<sub>" + output.charAt(i)+ "</sub>";
+                            }else{
+                                newTemp += output.charAt(i);
+                            }
+                        }
+
+                        newTemp = newTemp.toUpperCase();
+                        newTemp += " + ";
+                        String actual = inputArea.getText();
+                        actual = actual.replace(temp,"");
+                        boolean yes = false;
+                        for(int i = 0; i < actual.length();i++){
+                            System.out.print(actual.charAt(i));
+                            if(actual.charAt(i) == '+'){
+                                actual = insertString(actual, newTemp, i+1);
+                                break;
+                            }
+                        }
                         inputArea.setText(actual);
                     }
 
@@ -172,6 +227,30 @@ class Stoichiometry {
                 }
             }
         });
+    }
+    public static String insertString(
+            String originalString,
+            String stringToBeInserted,
+            int index)
+    {
+
+
+        String newString = new String();
+
+        for (int i = 0; i < originalString.length(); i++) {
+
+
+            newString += originalString.charAt(i);
+
+            if (i == index) {
+
+
+                newString += stringToBeInserted;
+            }
+        }
+
+        // return the modified String
+        return newString;
     }
 
 
