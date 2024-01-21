@@ -121,7 +121,7 @@ class Stoichiometry {
                     String url = null;
                     boolean yes = false;
                     String ll = temp;
-                    if(temp.length() == 1|| (Character.isDigit(ll.charAt(1)) && ll.length()==2)||(Character.isUpperCase(ll.charAt(0)) && Character.isLowerCase(ll.charAt(1)))){
+                    if(temp.length() == 1|| (Character.isDigit(ll.charAt(1)) && ll.length()==2)||(Character.isUpperCase(ll.charAt(0)) && Character.isLowerCase(ll.charAt(1))&& ll.length()==2)){
                         url =  "https://webbook.nist.gov/cgi/cbook.cgi?Formula="+ll+"&AllowExtra=on&NoIon=on&Units=SI";
                     }else{
 
@@ -151,11 +151,31 @@ class Stoichiometry {
                                 continue;
                             }
                         }
+                        if(el.text().contains("Formula:")){
+                            boolean breaker = false;
+                            Elements dodo = doc.getElementsByTag("h1");
+                            for (Element ell : dodo) {
+                                System.out.print(ell.id());
+                                if(ell.id().equals("Top")){
+                                    String part = "";
+                                    for(int i = 9; i < el.text().length(); i++){
+                                        part += el.text().charAt(i);
+                                    }
+                                    chemicals.addItem(ell.text()+ "(" + part + ")");
+                                    breaker = true;
+                                    break;
+
+                                }
+                            }
+                            if(breaker == true){
+                                break;
+                            }
+
+                        }
                         if(counter < 18){
                             counter++;
                             continue;
                         }
-
                         if(el.text().equals("Disclaimer (Note: This site is covered by copyright.)")||el.text().contains("IUPAC")){
                             chemicals.addItem("Nothing found");
                             break;
