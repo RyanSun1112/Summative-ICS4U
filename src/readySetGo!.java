@@ -30,11 +30,12 @@ class HomePage {
         instructions.setBounds(85,555,400,20);
         pane.add(instructions);
 
+        Design.QuickMenu2(pane,frame);
+
         JButton masterpiece = new JButton("Mendeleev's<BR>Masterpiece!");
         masterpiece.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
                 PeriodicTable pt = new PeriodicTable();
                 pt.theElementsOfThePeriodicTable();
             }
@@ -42,8 +43,6 @@ class HomePage {
         Design.formatButton(masterpiece,30);
         masterpiece.setBounds(740,265,240,120);
         pane.add(masterpiece);
-
-        Design.QuickMenu2(pane,frame);
 
         JButton check = new JButton("Check out<BR>the options!");
         check.addActionListener(new ActionListener() {

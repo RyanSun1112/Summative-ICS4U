@@ -125,7 +125,7 @@ public class Design {
 
     //SCROLLBAR FORMATTING METHOD
     public static void formatScrollBar(JScrollPane scrollPane) {
-        scrollPane.getVerticalScrollBar().setUnitIncrement(5);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
