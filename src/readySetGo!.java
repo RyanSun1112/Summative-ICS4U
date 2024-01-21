@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.ScrollBarUI;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -158,29 +159,55 @@ class Choices {
 
 
 
-class HowToPlay{
-    private final JFrame frame = new JFrame("Chemistry Galore! ~ How to wield this scepter!");
-    private final JLayeredPane pane = new JLayeredPane();
+class HowToPlay extends JPanel{
+    private final Color darkerBlue = new Color(90, 143, 143);
+    private final Color lighterBlue = new Color(182, 220, 220);
 
     public HowToPlay() {
-        ImageIcon image = new ImageIcon(Design.setScrollBackgroundImage("ChemistryGalore!/ChemistryGalore_howToPlay.png"));
-        JScrollPane scroll = new JScrollPane(new JLabel(image));
-        scroll.getVerticalScrollBar().setUnitIncrement(5);
-        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scroll.setBorder(BorderFactory.createEmptyBorder());
-        scroll.getVerticalScrollBar().setBackground(new Color(31,81,81));
-        scroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-            @Override
-            protected void configureScrollBarColors() {
-                this.thumbColor = new Color(255,255,255);
-            }
-        });
+        final JFrame frame = new JFrame("Chemistry Galore! ~ How to wield this scepter!");
+        setPreferredSize(new Dimension(874,1280));
+
+        JLabel paragraph1 = new JLabel("Have you ever had to deal with thousand upon thousands of" +
+                "<BR>chemical balancing questions? What about molar masses? Forget" +
+                "<BR>the elements of the Periodic Table? Well then, welcome to the world" +
+                "<BR>of Chemistry Galore! There are three main features of this app. The" +
+                "<BR>first is balancing chemical equations, where when you insert an" +
+                "<BR>unbalanced chemical equation, the program will provide you with the" +
+                "<BR>balanced version. There’s also molar masses, where when you insert" +
+                "<BR>the equation and provide the mass of one of the reactants, we’ll give" +
+                "<BR>you the rest of the masses! This is all not to mention our molecular" +
+                "<BR>models feature, where when you insert the name of a molecule, you’ll" +
+                "<BR>be given a 2D model of that molecule. Last but not least, there’s the" +
+                "<BR>page of Mendeleev’s masterpiece... the well know... ELEMENTS OF THE" +
+                "<BR>PERIODIC TABLE!! Have you ever found yourself forgetting the" +
+                "<BR>elements names, symbols, or masses? Not to worry, we’ve got you" +
+                "<BR>covered--that’s what we here at Chemistry Galore are all about!");
+        JLabel paragraph2 = new JLabel("This app was not designed to handle large, complicated chemical" +
+                "<BR>equations, and was designed for more simple equations... please limit" +
+                "<BR>equations to THREE reactants which will produce less than THREE products." +
+                "<BR>Please and thank you!");
+
+        Design.formatLabel(paragraph1,20);
+        Design.formatLabel(paragraph2,20);
+
+        setLayout(new GridLayout(2,1,5,230));
+        setBorder(BorderFactory.createEmptyBorder(300,90,40,30));
+
+        add(paragraph1);
+        add(paragraph2);
+
+        JScrollPane scroll = new JScrollPane(this);
+        Design.formatScrollBar(scroll);
 
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(scroll);
-        pane.setOpaque(false);
         frame.setSize(864,508);
         frame.setVisible(true);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(Design.setScrollBackgroundImage("ChemistryGalore!/ChemistryGalore_howToPlay.png"),0,0,null);
     }
 }

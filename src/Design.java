@@ -4,6 +4,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,8 @@ public class Design {
     //INSTANCE VARIABLES
     private final static Color white = new Color(255,255,255);
     private final static Color darkBlue = new Color(31, 81, 81);
+    private final static Color darkerBlue = new Color(90, 143, 143);
+    private final static Color lighterBlue = new Color(182, 220, 220);
 
 
 
@@ -120,6 +123,45 @@ public class Design {
     }
 
 
+    //SCROLLBAR FORMATTING METHOD
+    public static void formatScrollBar(JScrollPane scrollPane) {
+        scrollPane.getVerticalScrollBar().setUnitIncrement(5);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getVerticalScrollBar().setBackground(lighterBlue);
+
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = darkerBlue;
+            }
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                JButton button = super.createDecreaseButton(orientation);
+                button.setFocusable(false);
+                button.setBorder(BorderFactory.createEmptyBorder());
+                button.setBackground(lighterBlue);
+                button.setContentAreaFilled(false);
+                button.setBorderPainted(false);
+                button.setBorder(BorderFactory.createEmptyBorder());
+                return button;
+            }
+            @Override
+            protected JButton createIncreaseButton(int orientation) {
+                JButton button = super.createIncreaseButton(orientation);
+                button.setFocusable(false);
+                button.setBorder(BorderFactory.createEmptyBorder());
+                button.setBackground(lighterBlue);
+                button.setContentAreaFilled(false);
+                button.setBorderPainted(false);
+                button.setBorder(BorderFactory.createEmptyBorder());
+                return button;
+            }
+        });
+    }
+
+
     //BACKGROUND MAKING METHODS
     public static JLabel setBackgroundImage(String theURL) {
         Icon backgroundIcon=null;
@@ -127,7 +169,7 @@ public class Design {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             URL url = classloader.getResource(theURL);
             Image image = ImageIO.read(url);
-            image = image.getScaledInstance(1152,678,Image.SCALE_SMOOTH);
+            image = image.getScaledInstance(1152,678,Image.SCALE_FAST);
             backgroundIcon = new ImageIcon(image);
         } catch(IOException e){
             System.out.println("error...");
@@ -138,13 +180,31 @@ public class Design {
 
     }
 
+    public static JLabel setClearBackgroundImage(String theURL) {
+        Icon backgroundIcon=null;
+        try {
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            URL url = classloader.getResource(theURL);
+            Image image = ImageIO.read(url);
+            image = image.getScaledInstance(1037,610,Image.SCALE_SMOOTH);
+            //scale smooth takes longer to load, however the produced background is higher quality
+            backgroundIcon = new ImageIcon(image);
+        } catch(IOException e){
+            System.out.println("error...");
+        }
+        JLabel background = new JLabel(backgroundIcon);
+        background.setBounds(-70,-20,1152,648);
+        return background;
+
+    }
+
     public static Image setScrollBackgroundImage(String theURL) {
         Image image=null;
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             URL url = classloader.getResource(theURL);
             image = ImageIO.read(url);
-            image = image.getScaledInstance(864,2560,Image.SCALE_SMOOTH);
+            image = image.getScaledInstance(864,1280,Image.SCALE_FAST);
         } catch(IOException e){
             System.out.println("error...");
         }
@@ -199,7 +259,6 @@ public class Design {
         pTable.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
                 PeriodicTable pt = new PeriodicTable();
                 pt.theElementsOfThePeriodicTable();
             }
@@ -255,7 +314,6 @@ public class Design {
         pTable.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
                 PeriodicTable pt = new PeriodicTable();
                 pt.theElementsOfThePeriodicTable();
             }
@@ -310,7 +368,6 @@ public class Design {
         pTable.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
                 PeriodicTable pt = new PeriodicTable();
                 pt.theElementsOfThePeriodicTable();
             }

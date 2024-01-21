@@ -41,12 +41,12 @@ class PeriodicTable {
         seeAllElements.setBounds(460,185,455,120);
         pane.add(seeAllElements);
 
-        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpiece.png");
+        JLabel background = Design.setClearBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpiece.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.add(pane);
-        frame.setSize(1152,678);
+        frame.setSize(1037,610);
         frame.setVisible(true);
     }
 }
@@ -74,12 +74,12 @@ class theZoomedElementsOfThePeriodicTable {
         previousPage.setBounds(250,60,455,120);
         pane.add(previousPage);
 
-        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpieceBigEdition.png");
+        JLabel background = Design.setClearBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpieceBigEdition.png");
         pane.add(background, JLayeredPane.DEFAULT_LAYER);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(pane);
-        frame.setSize(1152, 678);
+        frame.setSize(1037,610);
         frame.setVisible(true);
     }
 }
