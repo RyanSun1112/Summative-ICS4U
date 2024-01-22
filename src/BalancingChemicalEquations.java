@@ -5,6 +5,9 @@ import org.jsoup.select.Elements;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
+import javax.swing.plaf.basic.ComboPopup;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -70,13 +73,9 @@ class BalancingChemicalEquations_V1 {
                 ((AbstractButton) chemicals.getComponent(i)).setBorderPainted(false);
             }
         }
-        chemicals.setBackground(Color.white);
-        chemicals.setForeground(Color.BLACK);
-        chemicals.setFont(Design.theNormalFont(16));
-        inputArea.setOpaque(false);
-        inputArea.setBorder(new EmptyBorder(0, 0,0,0));
-        inputArea.setBounds(635,330,420,100);
-        inputArea.setFont(Design.theNormalFont(24));
+
+        Design.formatComboBox(chemicals);
+        Design.formatTextPane(inputArea);
 
         pane.add(inputArea,JLayeredPane.POPUP_LAYER);
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_BCE1.png");

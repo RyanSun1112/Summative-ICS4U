@@ -4,7 +4,10 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.basic.ComboPopup;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,8 +23,8 @@ public class Design {
     //INSTANCE VARIABLES
     private final static Color white = new Color(255,255,255);
     private final static Color darkBlue = new Color(31, 81, 81);
-    private final static Color darkerBlue = new Color(90, 143, 143);
-    private final static Color lighterBlue = new Color(182, 220, 220);
+    private final static Color darkerBlue = new Color(122, 138, 153);
+    private final static Color lighterBlue = new Color(238,238,238);
 
 
 
@@ -78,48 +81,33 @@ public class Design {
 
 
     //TEXT FIELD FORMATTING METHOD
-    public static void formatTextField(JTextField textFieldName, String defaultText) {
-        textFieldName.setFont(Design.theNormalFont(50));
-        textFieldName.setForeground(darkBlue);
-        textFieldName.setColumns(7);
-        textFieldName.setBorder(BorderFactory.createEmptyBorder());
-        textFieldName.addFocusListener(new FocusListener() { //STUFF BELOW DOESN'T QUITE WORK YET!!
-            @Override
-            public void focusGained(FocusEvent e) {
-                String words = textFieldName.getText();
-                if(words.equals("Please insert your chemical equation here.")) {
-                    textFieldName.setText("");
-                    textFieldName.setForeground(darkBlue);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                String words = textFieldName.getText();
-                if (words.isEmpty() || words.isBlank()){
-                    textFieldName.setText("Please insert your chemical equation here.");
-                    textFieldName.setForeground(new Color(103, 103, 103));
-                }
-            }
-        });
+    public static void formatTextPane(JTextPane textFieldName) {
+        textFieldName.setOpaque(false);
+        textFieldName.setBorder(new EmptyBorder(0, 0,0,0));
+        textFieldName.setBounds(635,330,420,100);
+        textFieldName.setFont(Design.theNormalFont(24));
     }
 
 
     //COMBO BOX FORMATTING METHOD
-    public static void formatComboBox(JComboBox comboBoxName, int size) {
-        comboBoxName.setFocusable(false);
-        comboBoxName.setBorder(BorderFactory.createEmptyBorder());
-        comboBoxName.setOpaque(false);
-        for(int i = 0; i < comboBoxName.getComponentCount(); i++) {
-            if (comboBoxName.getComponent(i) instanceof JComponent) {
-                ((JComponent) comboBoxName.getComponent(i)).setBorder(new EmptyBorder(0,0,0,0));
+    public static void formatComboBox(JComboBox comboBoxName) {
+        comboBoxName.setBackground(Color.white);
+        comboBoxName.setForeground(Color.BLACK);
+        comboBoxName.setFont(Design.theNormalFont(16));
+        comboBoxName.setUI(new BasicComboBoxUI() {
+            @Override
+            protected ComboPopup createPopup() {
+                return new BasicComboPopup(comboBoxName) {
+                    @Override
+                    protected JScrollPane createScroller() {
+                        JScrollPane scroller = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                        Design.formatScrollBar(scroller);
+                        return scroller;
+                    }
+                };
             }
-            if (comboBoxName.getComponent(i) instanceof AbstractButton) {
-                ((AbstractButton) comboBoxName.getComponent(i)).setBorderPainted(false);
-            }
-        }
-        comboBoxName.setFont(Design.theNormalFont(size));
-        comboBoxName.setBackground(white);
-        comboBoxName.setForeground(darkBlue);
+        });
     }
 
 
