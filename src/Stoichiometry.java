@@ -17,6 +17,9 @@ class Stoichiometry {
     private final JFrame frame = new JFrame("Chemistry Galore! ~ Stoichiometry!");
     private final JComboBox chemicals = new JComboBox();
     private final JTextPane inputArea = new JTextPane();
+    private final JTextPane inputArea2 = new JTextPane();
+    private final JComboBox inputReact = new JComboBox();
+
     boolean minus = false;
     boolean arrow = false;
     boolean yes = false;
@@ -69,11 +72,23 @@ class Stoichiometry {
                 ((AbstractButton) chemicals.getComponent(i)).setBorderPainted(false);
             }
         }
+        Design.formatComboBox(inputReact);
+        inputReact.setBounds(890, 500, 180, 50);
+        Design.formatTextPane(inputArea2);
+        inputArea2.setBounds(650, 500, 180, 50);
 
-        Design.formatComboBox(chemicals);
-        Design.formatTextPane(inputArea);
+        chemicals.setBackground(Color.white);
+        chemicals.setForeground(Color.BLACK);
+        chemicals.setFont(Design.theNormalFont(16));
+        inputArea.setOpaque(false);
+        inputArea.setBorder(new EmptyBorder(0, 0,0,0));
+        inputArea.setBounds(635,330,420,100);
+        inputArea.setFont(Design.theNormalFont(24));
 
         pane.add(inputArea,JLayeredPane.POPUP_LAYER);
+        pane.add(inputReact, JLayeredPane.PALETTE_LAYER);
+        pane.add(inputArea2, JLayeredPane.PALETTE_LAYER);
+
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometry.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
         pane.add(chemicals, JLayeredPane.PALETTE_LAYER);
@@ -136,6 +151,11 @@ class Stoichiometry {
 
                             }
                             reactants.remove(reactants.size()-1);
+                            inputReact.removeAllItems();
+                            inputReact.addItem(" ");
+                            for(int i = 0; i < reactants.size(); i++){
+                                inputReact.addItem(reactants.get(i));
+                            }
                             inputArea.setText(inputArea.getText().replace(more, ""));
                             temp = "";
                         }
@@ -451,7 +471,13 @@ class Stoichiometry {
                         String actual = inputArea.getText();
                         actual = actual.replace(temp,"");
                         if(products.isEmpty()){
-                            actual = insertString(actual, newTemp, 82);
+                            for(int i = 0; i < actual.length(); i++){
+                                if(actual.charAt(i)=='-'){
+                                    actual = insertString(actual, newTemp, i+5);
+                                    break;
+
+                                }
+                            }
                         }else{
                             int counter5 = 0;
                             for(int i = 0; i < actual.length();i++){
@@ -472,6 +498,11 @@ class Stoichiometry {
                     chemicals.removeAllItems();
                     if(transfer == false){
                         reactants.add(output);
+                        inputReact.removeAllItems();
+                        inputReact.addItem(" ");
+                        for(int i = 0; i < reactants.size(); i++){
+                            inputReact.addItem(reactants.get(i));
+                        }
                         chemicals.addItem(" ");
                         chemicals.addItem("->");
                     }else{
