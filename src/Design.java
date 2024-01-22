@@ -335,7 +335,7 @@ public class Design {
             }
         });
         Design.formatButton(bce,18);
-        bce.setBounds(400,15,155,120);
+        bce.setBounds(345,20,155,120);
         pane.add(bce);
 
         JButton moleModels = new JButton("Molecular<BR>Models!");
@@ -348,7 +348,7 @@ public class Design {
             }
         });
         Design.formatButton(moleModels,18);
-        moleModels.setBounds(555,15,155,120);
+        moleModels.setBounds(480,20,155,120);
         pane.add(moleModels);
 
         JButton moleRatios = new JButton("Molar<BR>Ratios!");
@@ -361,7 +361,7 @@ public class Design {
             }
         });
         Design.formatButton(moleRatios,18);
-        moleRatios.setBounds(705,15,155,120);
+        moleRatios.setBounds(615,20,155,120);
         pane.add(moleRatios);
 
         JButton pTable = new JButton("Periodic<BR>Table!");
@@ -373,7 +373,7 @@ public class Design {
             }
         });
         Design.formatButton(pTable,18);
-        pTable.setBounds(855,15,155,120);
+        pTable.setBounds(750,20,155,120);
         pane.add(pTable);
     }
 }

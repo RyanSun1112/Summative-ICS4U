@@ -25,7 +25,7 @@ class PeriodicTable {
             }
         });
         Design.formatButton(back,30);
-        back.setBounds(190,305,155,120);
+        back.setBounds(150,280,155,120);
         pane.add(back);
 
         JButton seeAllElements = new JButton("Can't see all the elements?<BR>Click HERE to go fullscreen!");
@@ -38,7 +38,7 @@ class PeriodicTable {
             }
         });
         Design.formatButton(seeAllElements,25);
-        seeAllElements.setBounds(460,185,455,120);
+        seeAllElements.setBounds(380,175,455,120);
         pane.add(seeAllElements);
 
         JLabel background = Design.setClearBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpiece.png");
@@ -71,7 +71,7 @@ class theZoomedElementsOfThePeriodicTable {
             }
         });
         Design.formatButton(previousPage,25);
-        previousPage.setBounds(250,60,455,120);
+        previousPage.setBounds(200,60,455,120);
         pane.add(previousPage);
 
         JLabel background = Design.setClearBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpieceBigEdition.png");

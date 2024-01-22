@@ -59,21 +59,6 @@ class BalancingChemicalEquations_V1 {
         next.setBounds(880,405,155,120);
         pane.add(next);
 
-        JButton noFormula = new JButton("Don't know what the formula is?" +
-                "<BR>That's fine, click HERE to enter just<BR>the reactants and type of reaction," +
-                "<BR>then we'll do the rest!");
-        noFormula.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BalancingChemicalEquations_V2 answer = new BalancingChemicalEquations_V2();
-                answer.bcePage();
-            }
-        });
-        Design.formatButton(noFormula,20);
-        noFormula.setBounds(100,375,455,320);
-        pane.add(noFormula);
-
         chemicals.setBounds(635,325,440,50);
 
         for (int i = 0; i < chemicals.getComponentCount(); i++)
