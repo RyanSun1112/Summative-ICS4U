@@ -71,11 +71,11 @@ class Stoichiometry {
         }
         chemicals.setBackground(Color.white);
         chemicals.setForeground(Color.BLACK);
-        chemicals.setFont(Design.theNormalFont(12));
+        chemicals.setFont(Design.theNormalFont(16));
         inputArea.setOpaque(false);
         inputArea.setBorder(new EmptyBorder(0, 0,0,0));
         inputArea.setBounds(635,330,420,100);
-        inputArea.setFont(Design.theNormalFont(20));
+        inputArea.setFont(Design.theNormalFont(24));
         pane.add(inputArea,JLayeredPane.POPUP_LAYER);
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometry.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
