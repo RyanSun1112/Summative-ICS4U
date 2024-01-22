@@ -3,18 +3,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import javax.swing.*;
-import java.awt.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicComboBoxUI;
-import javax.swing.plaf.basic.BasicComboPopup;
-import javax.swing.plaf.basic.ComboPopup;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
 
-class BalancingChemicalEquations_V1 {
+class BalancingChemicalEquations {
 
     //INSTANCE VARIABLES
     private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
@@ -29,7 +26,7 @@ class BalancingChemicalEquations_V1 {
 
 
 
-    //BALANCING CHEMICAL EQUATIONS METHOD (1)
+    //BALANCING CHEMICAL EQUATIONS METHOD
     public void bcePage() {
 
         JLayeredPane pane = new JLayeredPane();
@@ -505,73 +502,6 @@ class BalancingChemicalEquations_V1 {
 
 
 
-class BalancingChemicalEquations_V2 {
-
-    //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
-
-
-    //BALANCING CHEMICAL EQUATIONS METHOD (2)
-    public void bcePage() {
-
-        JLayeredPane pane = new JLayeredPane();
-
-        Design.QuickMenu1(pane,frame);
-
-
-        JButton back = new JButton("Back?");
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                HomePage home = new HomePage();
-                home.start();
-            }
-        });
-        Design.formatButton(back,30);
-        back.setBounds(620,465,155,120);
-        pane.add(back);
-
-        JButton next = new JButton("Next!");
-        next.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BalancingChemicalEquations_Answer answer = new BalancingChemicalEquations_Answer();
-                answer.bceAnswerPage();
-            }
-        });
-        Design.formatButton(next,30);
-        next.setBounds(800,465,155,120);
-        pane.add(next);
-
-        JButton withFormula = new JButton("Want to enter the unbalanced" +
-                "<BR>formula instead? Click HERE to enter<BR>the entire chemical equation and," +
-                "<BR>type of reaction!");
-        withFormula.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BalancingChemicalEquations_V1 answer = new BalancingChemicalEquations_V1();
-                answer.bcePage();
-            }
-        });
-        Design.formatButton(withFormula,20);
-        withFormula.setBounds(60,345,455,320);
-        pane.add(withFormula);
-
-        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_BCE2.png");
-        pane.add(background,JLayeredPane.DEFAULT_LAYER);
-
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.add(pane);
-        frame.setSize(1152,678);
-        frame.setVisible(true);
-    }
-}
-
-
-
 class BalancingChemicalEquations_Answer {
 
     //INSTANCE VARIABLES
@@ -590,7 +520,7 @@ class BalancingChemicalEquations_Answer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                BalancingChemicalEquations bce = new BalancingChemicalEquations();
                 bce.bcePage();
             }
         });
@@ -641,7 +571,7 @@ class BalancingChemicalEquations_Explained {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                BalancingChemicalEquations bce = new BalancingChemicalEquations();
                 bce.bcePage();
             }
         });

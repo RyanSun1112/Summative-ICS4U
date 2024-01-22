@@ -209,7 +209,7 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                BalancingChemicalEquations bce = new BalancingChemicalEquations();
                 bce.bcePage();
             }
         });
@@ -264,7 +264,7 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                BalancingChemicalEquations bce = new BalancingChemicalEquations();
                 bce.bcePage();
             }
         });
@@ -318,7 +318,7 @@ public class Design {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BalancingChemicalEquations_V1 bce = new BalancingChemicalEquations_V1();
+                BalancingChemicalEquations bce = new BalancingChemicalEquations();
                 bce.bcePage();
             }
         });
