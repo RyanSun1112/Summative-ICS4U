@@ -58,16 +58,14 @@ public class ChemicalEquationBalancer2 {
             //noinspection SuspiciousMethodCalls
             contain = productsElements.contains(reactantsElement);
             if (!contain) {
-                System.out.println("Error: Same elements need to be on both sides of the equation.");
-                System.exit(0);
+                int y = 2/0;
             }
         }
         for (Object productsElement : productsElements) {
             //noinspection SuspiciousMethodCalls
             contain = reactantsElements.contains(productsElement);
             if (!contain) {
-                System.out.println("Error: Same elements need to be on both sides of the equation.");
-                System.exit(0);
+                int y = 2/0;
             }
         }
         elements=reactantsElements;
@@ -152,8 +150,7 @@ public class ChemicalEquationBalancer2 {
                         reactants_b.set(reactantIndex, reactantCoefficient);
                         products_b.set(productIndex, productCoefficient);
                     } else {
-                        System.out.println("This equation uses more than two variables.");
-                        System.exit(0);
+                        int y = 2/0;
                     }
                 }
             }

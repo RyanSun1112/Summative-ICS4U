@@ -133,24 +133,24 @@ class atomic_mass{
         String current = "";
         for(int i = 0; i < molecule.length();i++){
 
-            if(i == 0){
-                current += molecule.charAt(i);
-                continue;
-            }
-            if(Character.isUpperCase(molecule.charAt(i))){
-                float molar = getAtomicMass(current);
-                total += molar;
-                current = String.valueOf(molecule.charAt(i));
-                continue;
-            }
-            if(Character.isDigit(molecule.charAt(i))){
+            if(Character.isDigit(molecule.charAt(i)) && i > 0){
                 float molar = getAtomicMass(current);
                 float vafdas = Float.valueOf(String.valueOf(molecule.charAt(i)));
                 total += molar * vafdas;
-                break;
+                current = "";
+                if (i + 1 == molecule.length()) {
+                    break;
+                }
+                continue;
+            }
+            current += molecule.charAt(i);
+            if(i+1 == molecule.length()||(Character.isUpperCase(molecule.charAt(i+1)) && !Character.isDigit(molecule.charAt(i+1)))){
+                float molar = getAtomicMass(current);
+                total += molar;
+                current = "";
+                continue;
             }
 
-            current += molecule.charAt(i);
 
         }
         return total;
