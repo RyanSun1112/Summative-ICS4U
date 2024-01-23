@@ -1,3 +1,4 @@
+import java.util.HashMap;
 enum Elements {
     H, He,
     Li, Be, B, C, N, O, F, Ne,
@@ -9,3 +10,11 @@ enum Elements {
     Ce, Pr, Nd, Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu,
     Th, Pa, U, Np, Pu, Am, Cm, Bk, Cf, Es, Fm, Md, No, Lr;
 }
+class Balancing{
+    public final HashMap<Elements, String> atomic_mass = new HashMap<Elements, String>();
+    public void balance(String[] reactants, String[] products){
+
+
+    }
+}
+
