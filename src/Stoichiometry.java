@@ -25,8 +25,8 @@ class Stoichiometry {
     boolean yes = false;
     String temp = "";
     boolean transfer = false;
-    ArrayList<String> reactants = new ArrayList<String>();
-    ArrayList<String> products = new ArrayList<String>();
+    public static ArrayList<String> reactants = new ArrayList<String>();
+    public static ArrayList<String> products = new ArrayList<String>();
 
     //STOICHIOMETRY METHOD
     public void questionPage() {
@@ -555,6 +555,8 @@ class Stoichiometry_Answer {
 
     //STOICHIOMETRY METHOD
     public void stoichiometryAnswer() {
+        String cool = ChemicalEquationBalancer2.Balancing(Stoichiometry.reactants,Stoichiometry.products);
+        System.out.print(cool);
 
         JLayeredPane pane = new JLayeredPane();
 
