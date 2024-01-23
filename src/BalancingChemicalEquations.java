@@ -18,7 +18,7 @@ import static java.lang.Integer.parseInt;
 class BalancingChemicalEquations {
 
     //INSTANCE VARIABLES
-    private static final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
     private final JComboBox chemicals = new JComboBox();
     private final JTextPane inputArea = new JTextPane();
     boolean minus = false;
@@ -525,10 +525,118 @@ class BalancingChemicalEquations {
         ArrayList<String> leftSide = new ArrayList<String>();
         ArrayList<String> rightSide = new ArrayList<String>();
 
-        if(organizedList.size()>8) {
-             frame.setVisible(false);
-             Error error = new Error();
-             error.endIt();
+        for (int i=0;i<organizedList.size();i++) {
+            String thing = organizedList.get(i);
+            if (thing.equals("-")) {
+                break;
+            }
+
+            for (int e=0; e<organizedList.size();e++) {
+                String otherThing = organizedList.get(e);
+                if(e!=i) {
+                    String letter1 = otherThing.substring(0,1);
+                    String letter2 = thing.substring(0,1);
+                    if (letter1.equals(letter2)) {
+                        if (otherThing.length()>1) {
+                            if (thing.length()>1) {
+                                String letter3 = otherThing.substring(1, 2);
+                                String letter4 = thing.substring(1, 2);
+                                if (isLower(letter3) && isLower(letter4) && letter3.equals(letter4)) {
+                                    if (thing.length() > 2) {
+                                        int num = parseInt(thing.substring(2, 3));
+                                        int num2 = 0;
+                                        if (otherThing.length() > 2) {
+                                            num2 = parseInt(otherThing.substring(2, 3));
+                                        }
+                                        num += num2;
+                                        String withoutNum = thing.substring(0, 2);
+                                        String updatedElement = withoutNum + num;
+                                        leftSide.add(updatedElement);
+                                        organizedList.remove(otherThing);
+                                        e--;
+                                    } else if (otherThing.length() > 2) {
+                                        int num = parseInt(otherThing.substring(2, 3));
+                                        int num2 = 0;
+                                        if (thing.length() > 2) {
+                                            num2 = parseInt(thing.substring(2, 3));
+                                        }
+                                        num += num2;
+                                        String withoutNum = otherThing.substring(0, 2);
+                                        String updatedElement = withoutNum + num;
+                                        leftSide.add(updatedElement);
+                                        organizedList.remove(thing);
+                                        e--;
+                                    } else {
+                                        String updatedElement = thing + "2";
+                                        leftSide.add(updatedElement);
+                                        organizedList.remove(otherThing);
+                                        e--;
+                                    }
+                                } else {
+                                    String updatedElement = thing + "2";
+                                    leftSide.add(updatedElement);
+                                    organizedList.remove(otherThing);
+                                    e--;
+                                }
+                            } else {
+                                String updatedElement = thing + "2";
+                                leftSide.add(updatedElement);
+                                organizedList.remove(otherThing);
+                                e--;
+                            }
+                        }
+
+                        if (thing.length()>1) {
+                            if (otherThing.length()>1) {
+                                String letter3 = otherThing.substring(1, 2);
+                                String letter4 = thing.substring(1, 2);
+                                if (isLower(letter3) && isLower(letter4) && letter3.equals(letter4)) {
+                                    if (thing.length() > 2) {
+                                        int num = parseInt(thing.substring(2, 3));
+                                        int num2 = 0;
+                                        if (otherThing.length() > 2) {
+                                            num2 = parseInt(otherThing.substring(2, 3));
+                                        }
+                                        num += num2;
+                                        String withoutNum = thing.substring(0, 2);
+                                        String updatedElement = withoutNum + num;
+                                        leftSide.add(updatedElement);
+                                        organizedList.remove(otherThing);
+                                        e--;
+                                    } else if (otherThing.length() > 2) {
+                                        int num = parseInt(otherThing.substring(2, 3));
+                                        int num2 = 0;
+                                        if (thing.length() > 2) {
+                                            num2 = parseInt(thing.substring(2, 3));
+                                        }
+                                        num += num2;
+                                        String withoutNum = otherThing.substring(0, 2);
+                                        String updatedElement = withoutNum + num;
+                                        leftSide.add(updatedElement);
+                                        organizedList.remove(thing);
+                                        e--;
+                                    } else {
+                                        String updatedElement = thing + "2";
+                                        leftSide.add(updatedElement);
+                                        organizedList.remove(otherThing);
+                                        e--;
+                                    }
+                                } else {
+                                    String updatedElement = thing + "2";
+                                    leftSide.add(updatedElement);
+                                    organizedList.remove(otherThing);
+                                    e--;
+                                }
+                            } else {
+                                String updatedElement = otherThing + "2";
+                                leftSide.add(updatedElement);
+                                organizedList.remove(thing);
+                                e--;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         return String.join(",",organizedList);
