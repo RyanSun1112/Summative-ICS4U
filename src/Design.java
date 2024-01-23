@@ -91,23 +91,20 @@ public class Design {
 
     //COMBO BOX FORMATTING METHOD
     public static void formatComboBox(JComboBox comboBoxName) {
+
+        for (int i = 0; i < comboBoxName.getComponentCount(); i++)
+        {
+            if (comboBoxName.getComponent(i) instanceof JComponent) {
+                ((JComponent) comboBoxName.getComponent(i)).setBorder(new EmptyBorder(0, 0,0,0));
+            }
+            if (comboBoxName.getComponent(i) instanceof AbstractButton) {
+                ((AbstractButton) comboBoxName.getComponent(i)).setBorderPainted(false);
+            }
+        }
+
         comboBoxName.setBackground(Color.white);
         comboBoxName.setForeground(Color.BLACK);
         comboBoxName.setFont(Design.theNormalFont(16));
-        comboBoxName.setUI(new BasicComboBoxUI() {
-            @Override
-            protected ComboPopup createPopup() {
-                return new BasicComboPopup(comboBoxName) {
-                    @Override
-                    protected JScrollPane createScroller() {
-                        JScrollPane scroller = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-                        Design.formatScrollBar(scroller);
-                        return scroller;
-                    }
-                };
-            }
-        });
     }
 
 
