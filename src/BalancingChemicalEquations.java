@@ -7,8 +7,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
+import static java.lang.Character.isLetter;
+import static java.lang.Integer.parseInt;
 
 
 class BalancingChemicalEquations {
@@ -23,6 +26,8 @@ class BalancingChemicalEquations {
     boolean transfer = false;
     ArrayList<String> reactants = new ArrayList<String>();
     ArrayList<String> products = new ArrayList<String>();
+    private static Dictionary leftSide = new Hashtable();
+    private static Dictionary rightSide = new Hashtable();
 
 
 
@@ -53,6 +58,8 @@ class BalancingChemicalEquations {
                 frame.setVisible(false);
                 BalancingChemicalEquations_Answer answer = new BalancingChemicalEquations_Answer();
                 answer.bceAnswerPage();
+
+                System.out.println(balanceChemicalEquations(inputArea.getText()));
             }
         });
         Design.formatButton(next,30);
@@ -60,16 +67,6 @@ class BalancingChemicalEquations {
         pane.add(next);
 
         chemicals.setBounds(635,325,440,50);
-
-        for (int i = 0; i < chemicals.getComponentCount(); i++)
-        {
-            if (chemicals.getComponent(i) instanceof JComponent) {
-                ((JComponent) chemicals.getComponent(i)).setBorder(new EmptyBorder(0, 0,0,0));
-            }
-            if (chemicals.getComponent(i) instanceof AbstractButton) {
-                ((AbstractButton) chemicals.getComponent(i)).setBorderPainted(false);
-            }
-        }
 
         Design.formatComboBox(chemicals);
         Design.formatTextPane(inputArea);
@@ -477,6 +474,217 @@ class BalancingChemicalEquations {
                 }
             }
         });
+    }
+
+
+    //HELPER METHODS
+    private static String getShortened(String text) {
+        text=text.replace("</body>","");
+        text=text.replace("<body>","");
+        text=text.replace("</head>","");
+        text=text.replace("<head>","");
+        text=text.replace("</html>","");
+        text=text.replace("<html>","");
+        text=text.replace("</sub>","");
+        text=text.replace("<sub>","");
+        text=text.replace("-&gt;","-");
+
+        List<String> list = new ArrayList<String>(Arrays.asList(text.split("")));
+        ArrayList<String> arr = new ArrayList<>(list);
+
+        arr.removeIf(String::isBlank);
+        arr.remove(arr.size()-1);
+        text = String.join("",arr);
+        System.out.println("\n\n\nINPUT AREA TEXT!!!\npure text:" + text);
+        return text;
+    }
+
+    private static ArrayList<String> organizeArrayList(ArrayList<String> unbalancedList) {
+        System.out.println("unbalanced array: "+unbalancedList);
+        ArrayList<String> organizedList = new ArrayList<String>();
+
+        for(int i=0;i<unbalancedList.size();i++) {
+            String thing = unbalancedList.get(i);
+            if(isUpper(thing) || thing.equals("-")) {
+                System.out.println("organized: "+ organizedList);
+                organizedList.add(thing);
+            } else if(isLower(thing) || isDigit(thing)) {
+                System.out.println("organized: "+ organizedList);
+                organizedList.set(organizedList.size()-1,(organizedList.get(organizedList.size()-1)+thing));
+            }
+        }
+        System.out.println("organized: "+ organizedList);
+        return organizedList;
+    }
+
+    public static void equationBreakdown(ArrayList<String> arrayList) {
+        for(int i=0; i<arrayList.size();i++) { //for each element in the array of all the elements...
+            String thing = arrayList.get(i);
+            if(thing.equals("-")) { //'-' separates left and right sides, need to find left first
+                break;
+            }
+
+            List<String> list = new ArrayList<String>(Arrays.asList(thing.split("")));
+            ArrayList<String> element = new ArrayList<>(list); //list of all the characters in the single element
+            System.out.println("List of characters in the element!: "+element);
+
+            if (isDigit(element.get(element.size()-1))) { //if there's a number at the end of the element...
+                int numAtEnd = parseInt(element.get(element.size()-1));
+                String stuffAtStart = thing.substring(0,thing.length()-1); //everything except the number (so the element)
+                System.out.println("     Element: "+stuffAtStart+"\n     Number: "+numAtEnd);
+
+                if(((Hashtable) leftSide).containsKey(stuffAtStart)) { //if this element is already in the hashtable...
+                    int hashValue = (int) leftSide.get(stuffAtStart);
+                    hashValue+=numAtEnd;
+                    leftSide.remove(stuffAtStart);
+                    leftSide.put(stuffAtStart,hashValue); //adds that there's # more of that element, updates table
+                    System.out.println("update on hashtable!: "+leftSide);
+                } else { //if element isn't in hashtable...
+                    leftSide.put(stuffAtStart,numAtEnd);
+                    System.out.println("update on hashtable!: "+leftSide);
+                }
+            } else { //if there isn't a number at the end (meaning there's only one of that element)
+                System.out.println("     Element: "+thing+"\n     Number: 1");
+                if(((Hashtable) leftSide).containsKey(thing)) { //if the element is already in the hashtable...
+                    int hashValue = (int) leftSide.get(thing);
+                    hashValue+=1; //just add one, since there's only one of the element
+                    leftSide.remove(thing);
+                    leftSide.put(thing,hashValue); //update table
+                    System.out.println("update on hashtable!: "+leftSide);
+                } else { //if the element isn't in the hashtable...
+                    leftSide.put(thing,1);
+                    System.out.println("update on hashtable!: "+leftSide);
+                }
+            }
+
+        }
+        System.out.println("The number of elements in the REACTANTS!: " + leftSide);
+
+        int startAt = arrayList.indexOf("-");
+        for(int i=(startAt+1); i<arrayList.size();i++) { //for each element in the second half of the array...
+            String thing = arrayList.get(i);
+
+            List<String> list = new ArrayList<String>(Arrays.asList(thing.split("")));
+            ArrayList<String> element = new ArrayList<>(list); //list of all the characters in the single element
+            System.out.println("List of characters in the element!: "+element);
+
+            if (isDigit(element.get(element.size()-1))) { //if there's a number at the end of the element...
+                int numAtEnd = parseInt(element.get(element.size()-1));
+                String stuffAtStart = thing.substring(0,thing.length()-1); //everything except the number (so the element)
+                System.out.println("     Element: "+stuffAtStart+"\n     Number: "+numAtEnd);
+
+                if(((Hashtable) rightSide).containsKey(stuffAtStart)) { //if this element is already in the hashtable...
+                    int hashValue = (int) rightSide.get(stuffAtStart);
+                    hashValue+=numAtEnd;
+                    rightSide.remove(stuffAtStart);
+                    rightSide.put(stuffAtStart,hashValue); //adds that there's # more of that element, updates table
+                    System.out.println("update on hashtable!: "+rightSide);
+                } else { //if element isn't in hashtable...
+                    rightSide.put(stuffAtStart,numAtEnd);
+                    System.out.println("update on hashtable!: "+rightSide);
+                }
+            } else { //if there isn't a number at the end (meaning there's only one of that element)
+                System.out.println("     Element: "+thing+"\n     Number: 1");
+                if(((Hashtable) rightSide).containsKey(thing)) { //if the element is already in the hashtable...
+                    int hashValue = (int) rightSide.get(thing);
+                    hashValue+=1; //just add one, since there's only one of the element
+                    rightSide.remove(thing);
+                    rightSide.put(thing,hashValue); //update table
+                    System.out.println("update on hashtable!: "+rightSide);
+                } else { //if the element isn't in the hashtable...
+                    rightSide.put(thing,1);
+                    System.out.println("update on hashtable!: "+rightSide);
+                }
+            }
+        }
+        System.out.println("The number of elements in the PRODUCTS!: " + rightSide);
+    }
+
+    public static String balanceChemicalEquations(String unbalanced) {
+        unbalanced=getShortened(unbalanced);
+        List<String> list = new ArrayList<String>(Arrays.asList(unbalanced.split("")));
+        ArrayList<String> unbalancedList = new ArrayList<String>(list);
+        ArrayList<String> organizedList=organizeArrayList(unbalancedList);
+        equationBreakdown(organizedList);
+
+        return String.join(",",organizedList);
+    }
+
+    public static boolean isUpper(String str) {
+        ArrayList<String> arr = new ArrayList<String>();
+        arr.add("A");
+        arr.add("B");
+        arr.add("C");
+        arr.add("D");
+        arr.add("E");
+        arr.add("F");
+        arr.add("G");
+        arr.add("H");
+        arr.add("I");
+        arr.add("J");
+        arr.add("K");
+        arr.add("L");
+        arr.add("M");
+        arr.add("N");
+        arr.add("O");
+        arr.add("P");
+        arr.add("Q");
+        arr.add("R");
+        arr.add("S");
+        arr.add("T");
+        arr.add("U");
+        arr.add("V");
+        arr.add("W");
+        arr.add("X");
+        arr.add("Y");
+        arr.add("Z");
+        return arr.contains(str);
+    }
+
+    public static boolean isLower(String str) {
+        ArrayList<String> arr = new ArrayList<String>();
+        arr.add("a");
+        arr.add("b");
+        arr.add("c");
+        arr.add("d");
+        arr.add("e");
+        arr.add("f");
+        arr.add("g");
+        arr.add("h");
+        arr.add("i");
+        arr.add("j");
+        arr.add("k");
+        arr.add("l");
+        arr.add("m");
+        arr.add("n");
+        arr.add("o");
+        arr.add("p");
+        arr.add("q");
+        arr.add("r");
+        arr.add("s");
+        arr.add("t");
+        arr.add("u");
+        arr.add("v");
+        arr.add("w");
+        arr.add("x");
+        arr.add("y");
+        arr.add("z");
+        return arr.contains(str);
+    }
+
+    public static boolean isDigit(String str) {
+        ArrayList<String> digits = new ArrayList<String>();
+        digits.add("1");
+        digits.add("2");
+        digits.add("3");
+        digits.add("4");
+        digits.add("5");
+        digits.add("6");
+        digits.add("7");
+        digits.add("8");
+        digits.add("9");
+        digits.add("0");
+        return digits.contains(str);
     }
 
     public static String insertString(
