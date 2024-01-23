@@ -7,8 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 
 import static java.lang.Character.isLetter;
@@ -27,6 +26,8 @@ class BalancingChemicalEquations {
     boolean transfer = false;
     ArrayList<String> reactants = new ArrayList<String>();
     ArrayList<String> products = new ArrayList<String>();
+    private static Dictionary leftSide = new Hashtable();
+    private static Dictionary rightSide = new Hashtable();
 
 
 
@@ -516,128 +517,95 @@ class BalancingChemicalEquations {
         return organizedList;
     }
 
+    public static void equationBreakdown(ArrayList<String> arrayList) {
+        for(int i=0; i<arrayList.size();i++) { //for each element in the array of all the elements...
+            String thing = arrayList.get(i);
+            if(thing.equals("-")) { //'-' separates left and right sides, need to find left first
+                break;
+            }
+
+            List<String> list = new ArrayList<String>(Arrays.asList(thing.split("")));
+            ArrayList<String> element = new ArrayList<>(list); //list of all the characters in the single element
+            System.out.println("List of characters in the element!: "+element);
+
+            if (isDigit(element.get(element.size()-1))) { //if there's a number at the end of the element...
+                int numAtEnd = parseInt(element.get(element.size()-1));
+                String stuffAtStart = thing.substring(0,thing.length()-1); //everything except the number (so the element)
+                System.out.println("     Element: "+stuffAtStart+"\n     Number: "+numAtEnd);
+
+                if(((Hashtable) leftSide).containsKey(stuffAtStart)) { //if this element is already in the hashtable...
+                    int hashValue = (int) leftSide.get(stuffAtStart);
+                    hashValue+=numAtEnd;
+                    leftSide.remove(stuffAtStart);
+                    leftSide.put(stuffAtStart,hashValue); //adds that there's # more of that element, updates table
+                    System.out.println("update on hashtable!: "+leftSide);
+                } else { //if element isn't in hashtable...
+                    leftSide.put(stuffAtStart,numAtEnd);
+                    System.out.println("update on hashtable!: "+leftSide);
+                }
+            } else { //if there isn't a number at the end (meaning there's only one of that element)
+                System.out.println("     Element: "+thing+"\n     Number: 1");
+                if(((Hashtable) leftSide).containsKey(thing)) { //if the element is already in the hashtable...
+                    int hashValue = (int) leftSide.get(thing);
+                    hashValue+=1; //just add one, since there's only one of the element
+                    leftSide.remove(thing);
+                    leftSide.put(thing,hashValue); //update table
+                    System.out.println("update on hashtable!: "+leftSide);
+                } else { //if the element isn't in the hashtable...
+                    leftSide.put(thing,1);
+                    System.out.println("update on hashtable!: "+leftSide);
+                }
+            }
+
+        }
+        System.out.println("The number of elements in the REACTANTS!: " + leftSide);
+
+        int startAt = arrayList.indexOf("-");
+        for(int i=(startAt+1); i<arrayList.size();i++) { //for each element in the second half of the array...
+            String thing = arrayList.get(i);
+
+            List<String> list = new ArrayList<String>(Arrays.asList(thing.split("")));
+            ArrayList<String> element = new ArrayList<>(list); //list of all the characters in the single element
+            System.out.println("List of characters in the element!: "+element);
+
+            if (isDigit(element.get(element.size()-1))) { //if there's a number at the end of the element...
+                int numAtEnd = parseInt(element.get(element.size()-1));
+                String stuffAtStart = thing.substring(0,thing.length()-1); //everything except the number (so the element)
+                System.out.println("     Element: "+stuffAtStart+"\n     Number: "+numAtEnd);
+
+                if(((Hashtable) rightSide).containsKey(stuffAtStart)) { //if this element is already in the hashtable...
+                    int hashValue = (int) rightSide.get(stuffAtStart);
+                    hashValue+=numAtEnd;
+                    rightSide.remove(stuffAtStart);
+                    rightSide.put(stuffAtStart,hashValue); //adds that there's # more of that element, updates table
+                    System.out.println("update on hashtable!: "+rightSide);
+                } else { //if element isn't in hashtable...
+                    rightSide.put(stuffAtStart,numAtEnd);
+                    System.out.println("update on hashtable!: "+rightSide);
+                }
+            } else { //if there isn't a number at the end (meaning there's only one of that element)
+                System.out.println("     Element: "+thing+"\n     Number: 1");
+                if(((Hashtable) rightSide).containsKey(thing)) { //if the element is already in the hashtable...
+                    int hashValue = (int) rightSide.get(thing);
+                    hashValue+=1; //just add one, since there's only one of the element
+                    rightSide.remove(thing);
+                    rightSide.put(thing,hashValue); //update table
+                    System.out.println("update on hashtable!: "+rightSide);
+                } else { //if the element isn't in the hashtable...
+                    rightSide.put(thing,1);
+                    System.out.println("update on hashtable!: "+rightSide);
+                }
+            }
+        }
+        System.out.println("The number of elements in the PRODUCTS!: " + rightSide);
+    }
+
     public static String balanceChemicalEquations(String unbalanced) {
         unbalanced=getShortened(unbalanced);
         List<String> list = new ArrayList<String>(Arrays.asList(unbalanced.split("")));
         ArrayList<String> unbalancedList = new ArrayList<String>(list);
         ArrayList<String> organizedList=organizeArrayList(unbalancedList);
-
-        ArrayList<String> leftSide = new ArrayList<String>();
-        ArrayList<String> rightSide = new ArrayList<String>();
-
-        for (int i=0;i<organizedList.size();i++) {
-            String thing = organizedList.get(i);
-            if (thing.equals("-")) {
-                break;
-            }
-
-            for (int e=0; e<organizedList.size();e++) {
-                String otherThing = organizedList.get(e);
-                if(e!=i) {
-                    String letter1 = otherThing.substring(0,1);
-                    String letter2 = thing.substring(0,1);
-                    if (letter1.equals(letter2)) {
-                        if (otherThing.length()>1) {
-                            if (thing.length()>1) {
-                                String letter3 = otherThing.substring(1, 2);
-                                String letter4 = thing.substring(1, 2);
-                                if (isLower(letter3) && isLower(letter4) && letter3.equals(letter4)) {
-                                    if (thing.length() > 2) {
-                                        int num = parseInt(thing.substring(2, 3));
-                                        int num2 = 0;
-                                        if (otherThing.length() > 2) {
-                                            num2 = parseInt(otherThing.substring(2, 3));
-                                        }
-                                        num += num2;
-                                        String withoutNum = thing.substring(0, 2);
-                                        String updatedElement = withoutNum + num;
-                                        leftSide.add(updatedElement);
-                                        organizedList.remove(otherThing);
-                                        e--;
-                                    } else if (otherThing.length() > 2) {
-                                        int num = parseInt(otherThing.substring(2, 3));
-                                        int num2 = 0;
-                                        if (thing.length() > 2) {
-                                            num2 = parseInt(thing.substring(2, 3));
-                                        }
-                                        num += num2;
-                                        String withoutNum = otherThing.substring(0, 2);
-                                        String updatedElement = withoutNum + num;
-                                        leftSide.add(updatedElement);
-                                        organizedList.remove(thing);
-                                        e--;
-                                    } else {
-                                        String updatedElement = thing + "2";
-                                        leftSide.add(updatedElement);
-                                        organizedList.remove(otherThing);
-                                        e--;
-                                    }
-                                } else {
-                                    String updatedElement = thing + "2";
-                                    leftSide.add(updatedElement);
-                                    organizedList.remove(otherThing);
-                                    e--;
-                                }
-                            } else {
-                                String updatedElement = thing + "2";
-                                leftSide.add(updatedElement);
-                                organizedList.remove(otherThing);
-                                e--;
-                            }
-                        }
-
-                        if (thing.length()>1) {
-                            if (otherThing.length()>1) {
-                                String letter3 = otherThing.substring(1, 2);
-                                String letter4 = thing.substring(1, 2);
-                                if (isLower(letter3) && isLower(letter4) && letter3.equals(letter4)) {
-                                    if (thing.length() > 2) {
-                                        int num = parseInt(thing.substring(2, 3));
-                                        int num2 = 0;
-                                        if (otherThing.length() > 2) {
-                                            num2 = parseInt(otherThing.substring(2, 3));
-                                        }
-                                        num += num2;
-                                        String withoutNum = thing.substring(0, 2);
-                                        String updatedElement = withoutNum + num;
-                                        leftSide.add(updatedElement);
-                                        organizedList.remove(otherThing);
-                                        e--;
-                                    } else if (otherThing.length() > 2) {
-                                        int num = parseInt(otherThing.substring(2, 3));
-                                        int num2 = 0;
-                                        if (thing.length() > 2) {
-                                            num2 = parseInt(thing.substring(2, 3));
-                                        }
-                                        num += num2;
-                                        String withoutNum = otherThing.substring(0, 2);
-                                        String updatedElement = withoutNum + num;
-                                        leftSide.add(updatedElement);
-                                        organizedList.remove(thing);
-                                        e--;
-                                    } else {
-                                        String updatedElement = thing + "2";
-                                        leftSide.add(updatedElement);
-                                        organizedList.remove(otherThing);
-                                        e--;
-                                    }
-                                } else {
-                                    String updatedElement = thing + "2";
-                                    leftSide.add(updatedElement);
-                                    organizedList.remove(otherThing);
-                                    e--;
-                                }
-                            } else {
-                                String updatedElement = otherThing + "2";
-                                leftSide.add(updatedElement);
-                                organizedList.remove(thing);
-                                e--;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        equationBreakdown(organizedList);
 
         return String.join(",",organizedList);
     }
