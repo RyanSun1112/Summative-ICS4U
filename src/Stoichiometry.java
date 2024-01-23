@@ -17,8 +17,8 @@ class Stoichiometry {
     private final JFrame frame = new JFrame("Chemistry Galore! ~ Stoichiometry!");
     private final JComboBox chemicals = new JComboBox();
     private final JTextPane inputArea = new JTextPane();
-    private final JTextPane inputArea2 = new JTextPane();
-    private final JComboBox inputReact = new JComboBox();
+    public static final JTextPane inputArea2 = new JTextPane();
+    public static final JComboBox inputReact = new JComboBox();
 
     boolean minus = false;
     boolean arrow = false;
@@ -557,7 +557,27 @@ class Stoichiometry_Answer {
     public void stoichiometryAnswer() {
         String cool = ChemicalEquationBalancer2.Balancing(Stoichiometry.reactants,Stoichiometry.products);
         System.out.print(cool);
+        ArrayList <Float> coe = new ArrayList<>();
+        for(int i = 0; i < Stoichiometry.reactants.size(); i++){
+            cool = cool.replaceFirst(Stoichiometry.reactants.get(i),"");
+        }
+        for(int i = 0; i < Stoichiometry.products.size(); i++){
+            cool = cool.replaceFirst(Stoichiometry.products.get(i),"");
+        }
+        for(int i = 0; i < cool.length();i++){
 
+            if(Character.isDigit(cool.charAt(i))){
+
+                coe.add(Float.valueOf(String.valueOf(cool.charAt(i))));
+            }
+        }
+        float am = atomic_mass.getAtomicMassMole(String.valueOf(Stoichiometry.inputReact.getSelectedItem()));
+        float mooole = Float.valueOf(String.valueOf(Stoichiometry.inputArea2.getText())) / am;
+        for(int i = 0; i < Stoichiometry.products.size();i++){
+            float moolle = mooole * coe.get(Stoichiometry.reactants.size()+i)/coe.get(Stoichiometry.reactants.indexOf(String.valueOf(Stoichiometry.inputReact.getSelectedItem())));
+            float grams = moolle * atomic_mass.getAtomicMassMole(Stoichiometry.products.get(i));
+            System.out.println(grams);
+        }
         JLayeredPane pane = new JLayeredPane();
 
         Design.QuickMenu1(pane,frame);
