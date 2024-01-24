@@ -600,18 +600,7 @@ class Stoichiometry_Answer {
         back.setBounds(310,410,155,120);
         pane.add(back);
 
-        JButton understand = new JButton("Don't quite understand why? We've got your back! Click HERE for an explanation!");
-        understand.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                Stoichiometry_Explained see = new Stoichiometry_Explained();
-                see.StoichiometryExplanation();
-            }
-        });
-        Design.formatButton(understand,20);
-        understand.setBounds(140,510,900,120);
-        pane.add(understand);
+
 // balance chemical equations, calculate masses
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometryMasses.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
