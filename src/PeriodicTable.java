@@ -77,7 +77,7 @@ class theZoomedElementsOfThePeriodicTable {
         JLabel background = Design.setClearBackgroundImage("ChemistryGalore!/ChemistryGalore_mendeleevMasterpieceBigEdition.png");
         pane.add(background, JLayeredPane.DEFAULT_LAYER);
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.add(pane);
         frame.setSize(1037,610);
         frame.setVisible(true);

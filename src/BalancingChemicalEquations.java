@@ -24,10 +24,10 @@ class BalancingChemicalEquations {
     boolean yes = false;
     String temp = "";
     boolean transfer = false;
-    ArrayList<String> reactants = new ArrayList<String>();
-    ArrayList<String> products = new ArrayList<String>();
-    private static Dictionary leftSide = new Hashtable();
-    private static Dictionary rightSide = new Hashtable();
+    public static ArrayList<String> reactants = new ArrayList<String>();
+    public static ArrayList<String> products = new ArrayList<String>();
+    public static boolean canContinue=true;
+    public static String theEquation;
 
 
 
@@ -55,13 +55,26 @@ class BalancingChemicalEquations {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BalancingChemicalEquations_Answer answer = new BalancingChemicalEquations_Answer();
-                answer.bceAnswerPage();
+                theEquation = ChemicalEquationBalancer2.Balancing(BalancingChemicalEquations.reactants,BalancingChemicalEquations.products);
+                System.out.print(theEquation);
 
-                System.out.println(balanceChemicalEquations(inputArea.getText()));
+                if(theEquation.contains("ERROR")||theEquation.contains("error")
+                        || theEquation.equals("1 ---> 1")) { //if there's an error...
+                    frame.setVisible(false);
+                    Error error = new Error();
+                    error.endIt();
+                    canContinue = false;
+
+                }
+
+                if(canContinue) {
+                    frame.setVisible(false);
+                    BalancingChemicalEquations_Answer answer = new BalancingChemicalEquations_Answer();
+                    answer.bceAnswerPage();
+                }
             }
         });
+
         Design.formatButton(next,30);
         next.setBounds(880,405,155,120);
         pane.add(next);
@@ -478,138 +491,112 @@ class BalancingChemicalEquations {
 
 
     //HELPER METHODS
-    private static String getShortened(String text) {
-        text=text.replace("</body>","");
-        text=text.replace("<body>","");
-        text=text.replace("</head>","");
-        text=text.replace("<head>","");
-        text=text.replace("</html>","");
-        text=text.replace("<html>","");
-        text=text.replace("</sub>","");
-        text=text.replace("<sub>","");
-        text=text.replace("-&gt;","-");
+    public static String insertString(
+            String originalString,
+            String stringToBeInserted,
+            int index)
+    {
 
-        List<String> list = new ArrayList<String>(Arrays.asList(text.split("")));
+        String newString = new String();
+
+        for (int i = 0; i < originalString.length(); i++) {
+            newString += originalString.charAt(i);
+
+            if (i == index) {
+                newString += stringToBeInserted;
+            }
+        }
+
+        // return the modified String
+        return newString;
+    }
+}
+
+
+
+class BalancingChemicalEquations_Answer {
+
+    //INSTANCE VARIABLES
+    private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
+    private boolean canContinue = true;
+
+
+    //BALANCING CHEMICAL EQUATIONS ANSWER METHOD
+    public void bceAnswerPage() {
+        JLayeredPane pane = new JLayeredPane();
+        String balancedEquation = BalancingChemicalEquations.theEquation;
+        List<String> list = new ArrayList<String>(Arrays.asList(balancedEquation.split("")));
         ArrayList<String> arr = new ArrayList<>(list);
 
-        arr.removeIf(String::isBlank);
-        arr.remove(arr.size()-1);
-        text = String.join("",arr);
-        System.out.println("\n\n\nINPUT AREA TEXT!!!\npure text:" + text);
-        return text;
-    }
+        for(int i=0; i<arr.size();i++) {
+            list = new ArrayList<String>(Arrays.asList(balancedEquation.split("")));
+            arr = new ArrayList<>(list);
+            System.out.println("Array of split thingies!: "+arr);
 
-    private static ArrayList<String> organizeArrayList(ArrayList<String> unbalancedList) {
-        System.out.println("unbalanced array: "+unbalancedList);
-        ArrayList<String> organizedList = new ArrayList<String>();
-
-        for(int i=0;i<unbalancedList.size();i++) {
-            String thing = unbalancedList.get(i);
-            if(isUpper(thing) || thing.equals("-")) {
-                System.out.println("organized: "+ organizedList);
-                organizedList.add(thing);
-            } else if(isLower(thing) || isDigit(thing)) {
-                System.out.println("organized: "+ organizedList);
-                organizedList.set(organizedList.size()-1,(organizedList.get(organizedList.size()-1)+thing));
-            }
-        }
-        System.out.println("organized: "+ organizedList);
-        return organizedList;
-    }
-
-    public static void equationBreakdown(ArrayList<String> arrayList) {
-        for(int i=0; i<arrayList.size();i++) { //for each element in the array of all the elements...
-            String thing = arrayList.get(i);
-            if(thing.equals("-")) { //'-' separates left and right sides, need to find left first
-                break;
-            }
-
-            List<String> list = new ArrayList<String>(Arrays.asList(thing.split("")));
-            ArrayList<String> element = new ArrayList<>(list); //list of all the characters in the single element
-            System.out.println("List of characters in the element!: "+element);
-
-            if (isDigit(element.get(element.size()-1))) { //if there's a number at the end of the element...
-                int numAtEnd = parseInt(element.get(element.size()-1));
-                String stuffAtStart = thing.substring(0,thing.length()-1); //everything except the number (so the element)
-                System.out.println("     Element: "+stuffAtStart+"\n     Number: "+numAtEnd);
-
-                if(((Hashtable) leftSide).containsKey(stuffAtStart)) { //if this element is already in the hashtable...
-                    int hashValue = (int) leftSide.get(stuffAtStart);
-                    hashValue+=numAtEnd;
-                    leftSide.remove(stuffAtStart);
-                    leftSide.put(stuffAtStart,hashValue); //adds that there's # more of that element, updates table
-                    System.out.println("update on hashtable!: "+leftSide);
-                } else { //if element isn't in hashtable...
-                    leftSide.put(stuffAtStart,numAtEnd);
-                    System.out.println("update on hashtable!: "+leftSide);
-                }
-            } else { //if there isn't a number at the end (meaning there's only one of that element)
-                System.out.println("     Element: "+thing+"\n     Number: 1");
-                if(((Hashtable) leftSide).containsKey(thing)) { //if the element is already in the hashtable...
-                    int hashValue = (int) leftSide.get(thing);
-                    hashValue+=1; //just add one, since there's only one of the element
-                    leftSide.remove(thing);
-                    leftSide.put(thing,hashValue); //update table
-                    System.out.println("update on hashtable!: "+leftSide);
-                } else { //if the element isn't in the hashtable...
-                    leftSide.put(thing,1);
-                    System.out.println("update on hashtable!: "+leftSide);
-                }
-            }
-
-        }
-        System.out.println("The number of elements in the REACTANTS!: " + leftSide);
-
-        int startAt = arrayList.indexOf("-");
-        for(int i=(startAt+1); i<arrayList.size();i++) { //for each element in the second half of the array...
-            String thing = arrayList.get(i);
-
-            List<String> list = new ArrayList<String>(Arrays.asList(thing.split("")));
-            ArrayList<String> element = new ArrayList<>(list); //list of all the characters in the single element
-            System.out.println("List of characters in the element!: "+element);
-
-            if (isDigit(element.get(element.size()-1))) { //if there's a number at the end of the element...
-                int numAtEnd = parseInt(element.get(element.size()-1));
-                String stuffAtStart = thing.substring(0,thing.length()-1); //everything except the number (so the element)
-                System.out.println("     Element: "+stuffAtStart+"\n     Number: "+numAtEnd);
-
-                if(((Hashtable) rightSide).containsKey(stuffAtStart)) { //if this element is already in the hashtable...
-                    int hashValue = (int) rightSide.get(stuffAtStart);
-                    hashValue+=numAtEnd;
-                    rightSide.remove(stuffAtStart);
-                    rightSide.put(stuffAtStart,hashValue); //adds that there's # more of that element, updates table
-                    System.out.println("update on hashtable!: "+rightSide);
-                } else { //if element isn't in hashtable...
-                    rightSide.put(stuffAtStart,numAtEnd);
-                    System.out.println("update on hashtable!: "+rightSide);
-                }
-            } else { //if there isn't a number at the end (meaning there's only one of that element)
-                System.out.println("     Element: "+thing+"\n     Number: 1");
-                if(((Hashtable) rightSide).containsKey(thing)) { //if the element is already in the hashtable...
-                    int hashValue = (int) rightSide.get(thing);
-                    hashValue+=1; //just add one, since there's only one of the element
-                    rightSide.remove(thing);
-                    rightSide.put(thing,hashValue); //update table
-                    System.out.println("update on hashtable!: "+rightSide);
-                } else { //if the element isn't in the hashtable...
-                    rightSide.put(thing,1);
-                    System.out.println("update on hashtable!: "+rightSide);
+            System.out.println("Size of array: "+arr.size());
+            String character = arr.get(i);
+            System.out.println("Character (i): "+character);
+            if(isDigit(character)) {
+                try {
+                    if (isLetter(arr.get(i - 1))) {
+                        String startString = balancedEquation.substring(0,i);
+                        String endString = balancedEquation.substring((i+1));
+                        balancedEquation = startString+"<sub>"+character+"</sub>"+endString;
+                        System.out.println("Messy Thus Far: "+balancedEquation);
+                        i+=10;
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("\nFingers crossed this works :))\n");
                 }
             }
         }
-        System.out.println("The number of elements in the PRODUCTS!: " + rightSide);
+
+        System.out.println("\n\n\nTO-BE-OUTPUTTED TEXT!!!\nmessy text: " + balancedEquation);
+
+        balancedEquation=balancedEquation.replace("--->","→");
+        JLabel displayedChemEquation = new JLabel(balancedEquation);
+        Design.formatLabel(displayedChemEquation,35);
+        displayedChemEquation.setBounds(100,365,952,75);
+        pane.add(displayedChemEquation);
+
+        Design.QuickMenu1(pane,frame);
+
+        JButton back = new JButton("Back?");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                BalancingChemicalEquations bce = new BalancingChemicalEquations();
+                bce.bcePage();
+            }
+        });
+        Design.formatButton(back,30);
+        back.setBounds(510,425,155,120);
+        pane.add(back);
+
+        JButton understand = new JButton("Don't quite understand why? We've got your back! Click HERE for an explanation!");
+        understand.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                BalancingChemicalEquations_Explained see = new BalancingChemicalEquations_Explained();
+                see.bcePage();
+            }
+        });
+        Design.formatButton(understand,20);
+        understand.setBounds(140,510,900,120);
+        pane.add(understand);
+
+        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_BCEdrumroll.png");
+        pane.add(background,JLayeredPane.DEFAULT_LAYER);
+
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.add(pane);
+        frame.setSize(1152,678);
+        frame.setVisible(true);
     }
 
-    public static String balanceChemicalEquations(String unbalanced) {
-        unbalanced=getShortened(unbalanced);
-        List<String> list = new ArrayList<String>(Arrays.asList(unbalanced.split("")));
-        ArrayList<String> unbalancedList = new ArrayList<String>(list);
-        ArrayList<String> organizedList=organizeArrayList(unbalancedList);
-        equationBreakdown(organizedList);
-
-        return String.join(",",organizedList);
-    }
-
+    //HELPER METHODS
     public static boolean isUpper(String str) {
         ArrayList<String> arr = new ArrayList<String>();
         arr.add("A");
@@ -672,6 +659,10 @@ class BalancingChemicalEquations {
         return arr.contains(str);
     }
 
+    public static boolean isLetter(String str) {
+        return isUpper(str) || isLower(str);
+    }
+
     public static boolean isDigit(String str) {
         ArrayList<String> digits = new ArrayList<String>();
         digits.add("1");
@@ -685,77 +676,6 @@ class BalancingChemicalEquations {
         digits.add("9");
         digits.add("0");
         return digits.contains(str);
-    }
-
-    public static String insertString(
-            String originalString,
-            String stringToBeInserted,
-            int index)
-    {
-
-        String newString = new String();
-
-        for (int i = 0; i < originalString.length(); i++) {
-            newString += originalString.charAt(i);
-
-            if (i == index) {
-                newString += stringToBeInserted;
-            }
-        }
-
-        // return the modified String
-        return newString;
-    }
-}
-
-
-
-class BalancingChemicalEquations_Answer {
-
-    //INSTANCE VARIABLES
-    private final JFrame frame = new JFrame("Chemistry Galore! ~ Balancing Chemical Equations!");
-
-
-    //BALANCING CHEMICAL EQUATIONS ANSWER METHOD
-    public void bceAnswerPage() {
-
-        JLayeredPane pane = new JLayeredPane();
-
-        Design.QuickMenu1(pane,frame);
-
-        JButton back = new JButton("Back?");
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BalancingChemicalEquations bce = new BalancingChemicalEquations();
-                bce.bcePage();
-            }
-        });
-        Design.formatButton(back,30);
-        back.setBounds(510,425,155,120);
-        pane.add(back);
-
-        JButton understand = new JButton("Don't quite understand why? We've got your back! Click HERE for an explanation!");
-        understand.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BalancingChemicalEquations_Explained see = new BalancingChemicalEquations_Explained();
-                see.bcePage();
-            }
-        });
-        Design.formatButton(understand,20);
-        understand.setBounds(140,510,900,120);
-        pane.add(understand);
-
-        JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_BCEdrumroll.png");
-        pane.add(background,JLayeredPane.DEFAULT_LAYER);
-
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.add(pane);
-        frame.setSize(1152,678);
-        frame.setVisible(true);
     }
 }
 
