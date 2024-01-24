@@ -33,7 +33,18 @@ class MoleculeInput {
         });
         d.setBounds(800,470,155,120);
         pane.add(d);
-
+        JButton back = new JButton("Back?");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                HomePage home = new HomePage();
+                home.start();
+            }
+        });
+        Design.formatButton(back,30);
+        back.setBounds(610,470,155,120);
+        pane.add(back);
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_moleculeModels.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
 
@@ -58,7 +69,18 @@ class MoleculeOutput{
         JLayeredPane pane = new JLayeredPane();
 
         Design.QuickMenu1(pane,frame);
-
+        JButton back = new JButton("Back?");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                MoleculeInput dd = new MoleculeInput();
+                dd.page();
+            }
+        });
+        Design.formatButton(back,30);
+        back.setBounds(310,220,155,120);
+        pane.add(back,JLayeredPane.POPUP_LAYER);
 
 // fix algorithm for 3D model
         String molecule = line;

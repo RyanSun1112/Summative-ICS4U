@@ -62,7 +62,7 @@ class Stoichiometry {
             Design.formatButton(next,30);
             next.setBounds(340,420,155,120);
             pane.add(next,JLayeredPane.PALETTE_LAYER);
-
+            //PreInput formatting specifications
             reactants.clear();
             products.clear();
             chemicals.setBounds(635,325,440,50);
@@ -101,14 +101,14 @@ class Stoichiometry {
             frame.setSize(1152,678);
 
             frame.setVisible(true);
-            inputArea.addKeyListener(new KeyAdapter() {
+            inputArea.addKeyListener(new KeyAdapter() {  //key pressed
                 @Override
                 public void keyReleased(KeyEvent e) {
                     try{
 
                     temp = "";
                     int counter1 = 0;
-
+                    //get what the user inputted
                     if(transfer == false) {
                         if(minus == false){
                             temp = inputArea.getText();
@@ -179,7 +179,7 @@ class Stoichiometry {
                                 chemicals.setPopupVisible(true);
 
                             }
-                        }else{
+                        }else{ //Search in database for similar compounds
 
                             chemicals.setPopupVisible(true);
                             String url = null;
@@ -253,7 +253,7 @@ class Stoichiometry {
                             }
 
                         }//
-                    }else{
+                    }else{//same thing as above, but for products
                         if(minus == false){
                             temp = inputArea.getText();
                         }else if(products.isEmpty()){
@@ -397,7 +397,7 @@ class Stoichiometry {
                 }
             });
             chemicals.addActionListener (new ActionListener () {
-                public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e) { // if an combobox item is selected
                     try{
 
                     if(String.valueOf(chemicals.getSelectedItem()).equals("->")){
@@ -414,7 +414,7 @@ class Stoichiometry {
                         inputArea.setText(actual);
                         transfer = true;
                         chemicals.removeAllItems();
-                    }
+                    }//insert in the inputArea, with substrings
                     else if(String.valueOf(e.getSource()).equals("javax.swing.JComboBox[,635,325,440x50,layout=javax.swing.plaf.metal.MetalComboBoxUI$MetalComboBoxLayoutManager,alignmentX=0.0,alignmentY=0.0,border=,flags=328,maximumSize=,minimumSize=,preferredSize=,isEditable=false,lightWeightPopupEnabled=true,maximumRowCount=8,selectedItemReminder="+chemicals.getSelectedItem()+"]")){
                         String cool = String.valueOf(chemicals.getSelectedItem());
                         String[] arrOfStr = cool.split("\\(");
@@ -542,7 +542,7 @@ class Stoichiometry {
             cddd.endIt();
         }
     }
-    public static String insertString(
+    public static String insertString(//insert string in a string
             String originalString,
             String stringToBeInserted,
             int index)
@@ -612,7 +612,7 @@ class Stoichiometry_Answer {
         Design.formatButton(understand,20);
         understand.setBounds(140,510,900,120);
         pane.add(understand);
-
+// balance chemical equations, calculate masses
         JLabel background = Design.setBackgroundImage("ChemistryGalore!/ChemistryGalore_stoichiometryMasses.png");
         pane.add(background,JLayeredPane.DEFAULT_LAYER);
         String cool = ChemicalEquationBalancer2.Balancing(Stoichiometry.reactants,Stoichiometry.products);
