@@ -27,12 +27,14 @@ class BalancingChemicalEquations {
     public static ArrayList<String> reactants = new ArrayList<String>();
     public static ArrayList<String> products = new ArrayList<String>();
     public static boolean canContinue=true;
-    public static String theEquation;
+    public static String theEquation = "";
 
 
 
     //BALANCING CHEMICAL EQUATIONS METHOD
     public void bcePage() {
+        reactants.clear();
+        products.clear();
 
         JLayeredPane pane = new JLayeredPane();
 
@@ -55,6 +57,7 @@ class BalancingChemicalEquations {
         next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                theEquation = "";
                 theEquation = ChemicalEquationBalancer2.Balancing(BalancingChemicalEquations.reactants,BalancingChemicalEquations.products);
                 System.out.print(theEquation);
 
@@ -97,6 +100,8 @@ class BalancingChemicalEquations {
         inputArea.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
+                try{
+
                 temp = "";
                 int counter1 = 0;
 
@@ -370,10 +375,18 @@ class BalancingChemicalEquations {
                     }
                 }
 
+                }catch(Exception ee){
+                    frame.setVisible(false);
+
+                    Error cddd = new Error();
+                    cddd.endIt();
+                }
             }
         });
         chemicals.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
+                try{
+
                 if(String.valueOf(chemicals.getSelectedItem()).equals("->")){
                     String actual = inputArea.getText();
                     for(int i = actual.length()-1; i > 0; i--){
@@ -485,6 +498,12 @@ class BalancingChemicalEquations {
                     yes = true;
 
                 }
+                }catch(Exception ee){
+                    frame.setVisible(false);
+
+                    Error cddd = new Error();
+                    cddd.endIt();
+                }
             }
         });
     }
@@ -523,7 +542,9 @@ class BalancingChemicalEquations_Answer {
 
     //BALANCING CHEMICAL EQUATIONS ANSWER METHOD
     public void bceAnswerPage() {
+
         JLayeredPane pane = new JLayeredPane();
+        try{
         String balancedEquation = BalancingChemicalEquations.theEquation;
         List<String> list = new ArrayList<String>(Arrays.asList(balancedEquation.split("")));
         ArrayList<String> arr = new ArrayList<>(list);
@@ -547,6 +568,7 @@ class BalancingChemicalEquations_Answer {
                     }
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("\nFingers crossed this works :))\n");
+
                 }
             }
         }
@@ -558,6 +580,12 @@ class BalancingChemicalEquations_Answer {
         Design.formatLabel(displayedChemEquation,35);
         displayedChemEquation.setBounds(320,365,752,75);
         pane.add(displayedChemEquation);
+        }catch(Exception eee){
+            frame.setVisible(false);
+
+            Error cddd = new Error();
+            cddd.endIt();
+        }
 
         Design.QuickMenu1(pane,frame);
 
