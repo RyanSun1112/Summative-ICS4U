@@ -556,7 +556,7 @@ class BalancingChemicalEquations_Answer {
         balancedEquation=balancedEquation.replace("--->","→");
         JLabel displayedChemEquation = new JLabel(balancedEquation);
         Design.formatLabel(displayedChemEquation,35);
-        displayedChemEquation.setBounds(100,365,952,75);
+        displayedChemEquation.setBounds(320,365,752,75);
         pane.add(displayedChemEquation);
 
         Design.QuickMenu1(pane,frame);
